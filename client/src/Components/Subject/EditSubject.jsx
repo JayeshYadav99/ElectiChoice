@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 const EditSubject = () => {
   const { id } = useParams();
   const subjectId = id;
-  
+
   const [subjectData, setSubjectData] = useState({
     subjectName: "",
     subjectCode: "",
@@ -21,7 +21,7 @@ const EditSubject = () => {
       const response = await axios.get(
         `http://localhost:4000/subject/getsubject/${subjectId}`
       );
-      console.log(response.data)
+      console.log(response.data);
       setSubjectData(response.data);
     } catch (error) {
       console.error(error);
@@ -38,7 +38,10 @@ const EditSubject = () => {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:4000/subject/updateSubject/${subjectId}`, subjectData);
+      await axios.put(
+        `http://localhost:4000/subject/updateSubject/${subjectId}`,
+        subjectData
+      );
       // Display a success message or redirect to the subject list
     } catch (error) {
       console.error(error);
@@ -47,7 +50,7 @@ const EditSubject = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-gray-900">
       <h2 className="text-2xl font-bold mb-4">Edit Subject</h2>
       <form>
         <div className="mb-4">
