@@ -9,6 +9,7 @@ import Login from './Components/Auth/Login'
 import Signup from './Components/Auth/Signup'
 import ProtectedRoutes from "./Pages/ProtectedRoutes";
 import PrivateRoutes from './Pages/PrivateRoutes'
+import ErrorBoundary from './Pages/ErrorBoundary'
 
 function App() {
   const [count, setCount] = useState(0)

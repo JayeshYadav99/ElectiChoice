@@ -34,7 +34,7 @@ const Login = () => {
       if (response) {
         console.log(response.data.token);
         cookies.set("TOKEN", response.data.token, {
-          path: "/Home",
+          path: "/",
         });
       }
       console.log(cookies.get("TOKEN"));

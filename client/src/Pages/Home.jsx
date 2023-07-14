@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import Cookies from "universal-cookie";
 
 const Home = () => {
+    const cookies = new Cookies();
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies([]);
-  const [username, setUsername] = useState("");
 
+  const [username, setUsername] = useState("");
+  const token = cookies.get("TOKEN");
   useEffect(() => {
     const verifyCookie = async () => {
-      if (!cookies.TOKEN) {
+    
+       
+        console.log(token);
+      if (!token) {
+        console.log("1");
         navigate("/login");
       } else {
         try {
           const response = await axios.get("http://localhost:4000/yaae", {
             withCredentials: true,
             headers: {
-              Authorization: `Bearer ${cookies.TOKEN}`,
+              Authorization: `Bearer ${token}`,
             },
           });
 
@@ -28,23 +34,38 @@ const Home = () => {
             console.log(user.username);
             setUsername(user.username);
           } else {
+            console.log("2");
+            cookies.remove("TOKEN", { path: "/login" });
 
-            removeCookie("TOKEN");
             navigate("/login");
           }
         } catch (error) {
+            console.log("3");
           console.error(error);
-          removeCookie("TOKEN");
-          navigate("/login");
+          cookies.remove("TOKEN", { path: "/login" });
+
+          navigate("/Signup");
         }
       }
     };
 
     verifyCookie();
-  }, [cookies, navigate, removeCookie]);
+  }, [cookies, navigate]);
 
   const handleLogout = () => {
-    removeCookie("TOKEN");
+    console.log("4");
+    cookies.remove("TOKEN", { path: "/" });
+    console.log(cookies.get("TOKEN"));
+
+    if(token)
+    {
+        console.log("cookie is here");
+        console.log(cookies.cookies.TOKEN);
+    }
+    else{
+        console.log("cookie is not here");
+    }
+
     navigate("/login");
   };
 
