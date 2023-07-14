@@ -1,6 +1,24 @@
 import React from 'react'
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import Cookies from 'universal-cookie';
 export default function Navbar() {
+  const cookies = new Cookies();
+  const token = cookies.get('TOKEN');
+  const[show,Setshow]=useState(false);
+
+  useEffect(() => {
+if(token)
+{
+
+}else
+{
+
+}
+  
+    
+  }, [ ])
+  
   return (
     <div>
         <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">

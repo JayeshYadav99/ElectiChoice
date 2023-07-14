@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import Cookies from "universal-cookie";
 
 const Signup = () => {
+  const cookies = new Cookies();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -19,33 +20,32 @@ const Signup = () => {
     });
   };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/signup",
+      const response = await axios.post(
+        "http://localhost:4000/auth/signup",
         {
           ...inputValue,
         },
         { withCredentials: true }
       );
-      const { success, message } = data;
+
+      if (response) {
+        console.log(response.data.token);
+        cookies.set("TOKEN", response.data.token, {
+          path: "/",
+        });
+      }
+      console.log(cookies.get("TOKEN"));
+
+      const { success, message } = response.data;
       if (success) {
-        handleSuccess(message);
         setTimeout(() => {
-          navigate("/");
+          navigate("/Home");
         }, 1000);
       } else {
-        handleError(message);
+        console.log(message);
       }
     } catch (error) {
       console.log(error);
@@ -59,45 +59,63 @@ const Signup = () => {
   };
 
   return (
-    <div className="form_container">
-      <h2>Signup Account</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Username</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            placeholder="Enter your username"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            placeholder="Enter your password"
-            onChange={handleOnChange}
-          />
-        </div>
-        <button type="submit">Submit</button>
-        <span>
-          Already have an account? <Link to={"/login"}>Login</Link>
-        </span>
-      </form>
-      <ToastContainer />
+    <div className="flex justify-center items-center h-screen">
+      <div className="max-w-md p-8 bg-white rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Signup Account</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label htmlFor="email" className="text-lg font-medium">
+              Email
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={handleOnChange}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="text-lg font-medium">
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              value={username}
+              placeholder="Enter your username"
+              onChange={handleOnChange}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label htmlFor="password" className="text-lg font-medium">
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              placeholder="Enter your password"
+              onChange={handleOnChange}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-700"
+          >
+            Submit
+          </button>
+          <span>
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500">
+              Login
+            </Link>
+          </span>
+        </form>
+      </div>
     </div>
   );
 };
