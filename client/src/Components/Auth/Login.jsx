@@ -58,12 +58,17 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="max-w-md w-full px-6 py-8 bg-white border-2 border-gray-300 shadow-lg rounded-md">
-        <h2 className="text-3xl font-bold text-center mb-6">Login Account</h2>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-900">
+      <div className="max-w-md w-full px-6 py-8  border-2 border-gray-300 shadow-lg rounded-md bg-gray-800">
+        <h2 className="text-3xl font-bold text-center mb-6 text-white">
+          Login Account
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
-            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">
+            <label
+              htmlFor="email"
+              className="block mb-2 text-sm font-medium text-white"
+            >
               Email
             </label>
             <input
@@ -72,11 +77,14 @@ const Login = () => {
               value={email}
               placeholder="Enter your email"
               onChange={handleOnChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">
+            <label
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium text-white"
+            >
               Password
             </label>
             <input
@@ -85,18 +93,24 @@ const Login = () => {
               value={password}
               placeholder="Enter your password"
               onChange={handleOnChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              className="bg-white border border-gray-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
           </div>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mb-2"
           >
             Submit
           </button>
         </form>
-        <span className="mt-4">
-          Already have an account? <Link to={"/signup"} className="text-blue-700">Signup</Link>
+        <span className="mt-4 text-white">
+          Already have an account?{" "}
+          <Link
+            to={"/signup"}
+            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          >
+            Signup
+          </Link>
         </span>
       </div>
     </div>
