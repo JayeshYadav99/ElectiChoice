@@ -1,48 +1,50 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 const StudentList = () => {
-  
-    const [students, setStudents] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [selectedStudent, setSelectedStudent] = useState(null);
+  const [students, setStudents] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
+  useEffect(() => {
+    fetchStudents();
+  }, []);
 
-    useEffect(() => {
+  const fetchStudents = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4000/student/allstudents"
+      );
+      console.log(response.data[0]);
+      setStudents(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = (student) => {
+    setSelectedStudent(student);
+    setShowModal(true);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:4000/student//DeleteStudent/${selectedStudent.idNumber}`
+      );
+      // Display a success message or update the student list
       fetchStudents();
-    }, []);
-  
-    const fetchStudents = async () => {
-      try {
-        const response = await axios.get("http://localhost:4000/student/allstudents");
-        console.log(response.data[0]);
-        setStudents(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    } catch (error) {
+      console.error(error);
+      // Display an error message
+    }
+    setShowModal(false);
+  };
 
-    const handleDelete = (student) => {
-        setSelectedStudent(student);
-        setShowModal(true);
-      };
-    
-      const confirmDelete = async () => {
-        try {
-          await axios.delete(`http://localhost:4000/student//DeleteStudent/${selectedStudent.idNumber}`);
-          // Display a success message or update the student list
-          fetchStudents();
-        } catch (error) {
-          console.error(error);
-          // Display an error message
-        }
-        setShowModal(false);
-      };
-    
-      const cancelDelete = () => {
-        setSelectedStudent(null);
-        setShowModal(false);
-      };
+  const cancelDelete = () => {
+    setSelectedStudent(null);
+    setShowModal(false);
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -51,32 +53,29 @@ const StudentList = () => {
         {students.map((student) => (
           <div
             key={student.id}
-            className="bg-white shadow rounded p-4 flex flex-col justify-between"
+            className="bg-white shadow rounded border border-gray-300 p-4 flex flex-col justify-between"
           >
             <div>
               <h3 className="text-lg font-medium">{student.name}</h3>
-              <p className="text-gray-500">ID: {student.idNumber
-}</p>
+              <p className="text-gray-500">ID: {student.idNumber}</p>
               <p className="text-gray-500">Email: {student.email}</p>
-              <p className="text-gray-500">Phone: {student.phoneNumber
-}</p>
+              <p className="text-gray-500">Phone: {student.phoneNumber}</p>
             </div>
             <div className="mt-4">
               {/* Add buttons for editing and deleting a student */}
               <Link
                 to={{
-                    pathname: `/edit/${student.idNumber}`,
-                    state: { studentData: student,id:student.idNumber }
-                  }} // Assuming the route for EditStudent component is '/edit/:id'
+                  pathname: `/edit/${student.idNumber}`,
+                  state: { studentData: student, id: student.idNumber },
+                }} // Assuming the route for EditStudent component is '/edit/:id'
                 className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
               >
                 Edit
-                </Link>
-                <button
+              </Link>
+              <button
                 onClick={() => handleDelete(student)}
-                className="bg-red-500 text-white px-4 py-2 rounded"
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
               >
-
                 Delete
               </button>
             </div>
@@ -126,7 +125,7 @@ const StudentList = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  d="M10 11V6m0 0 6-6M10 11h4m-4 0H6"
                 />
               </svg>
               <h3 className="mb-5 text-lg font-normal text-gray-500">
