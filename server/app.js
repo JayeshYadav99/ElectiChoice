@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoutes");
 const StudentRoute = require("./Routes/StudentRoutes");
+const SubjectRoute =require('./Routes/SubjectRoutes')
 const { authMiddleware } = require("./Middleware/AuthMiddleware");
 
 require("dotenv").config();
@@ -36,6 +37,7 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/student", StudentRoute);
+app.use("/subject",SubjectRoute);
 app.get("/yaae", authMiddleware, (req, res) => {
   console.log(req.user);
   res.json({ status: true, user: req.user });
