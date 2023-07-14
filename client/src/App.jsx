@@ -26,13 +26,13 @@ function App() {
 
 <Route path="/" element={<Homepage/>}></Route>
   <Route element={<PrivateRoutes/>}>
-    <Route path='Home'element={<Home/>}></Route>
+    <Route path='Home'element={<><Navbar/><Home/></> }></Route>
     <Route path='Student'element={<StudentHome/>}></Route>
 
   </Route>
 
-  <Route path="/Login" element={<Login/>}></Route>
-  <Route path="/Signup" element={<Signup/>}></Route>
+  <Route path="/Login" element={<><Navbar/><Login/></>}></Route>
+  <Route path="/Signup" element={<><Navbar/> <Signup/></>}></Route>
   <Route path="/add-student" element={<StudentForm/>}></Route>
   <Route path="/edit/:id" element={<EditStudent/>}></Route>
 </Routes>
