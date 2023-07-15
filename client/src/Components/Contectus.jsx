@@ -10,7 +10,7 @@ export default function Contectus() {
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
               for="grid-first-name"
             >
               First Name
@@ -19,12 +19,11 @@ export default function Contectus() {
               class="appearance-none block w-full bg-gray-900 text-white placeholder-white border border-white focus:border-blue-300 rounded py-3 px-4 mb-3 leading-tight "
               id="grid-first-name"
               type="text"
-              placeholder="Enter your first name"
             />
           </div>
           <div class="w-full md:w-1/2 px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
               for="grid-last-name"
             >
               Last Name
@@ -33,14 +32,13 @@ export default function Contectus() {
               class="appearance-none block w-full bg-gray-900 text-white placeholder-white border border-gray-200 rounded py-3 px-4 leading-tight  focus:border-blue-500"
               id="grid-last-name"
               type="text"
-              placeholder="Doe"
             />
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
               for="grid-password"
             >
               E-mail
@@ -50,7 +48,7 @@ export default function Contectus() {
               id="email"
               type="email"
             />
-            <p class="text-gray-600 text-xs italic">
+            <p class="text-gray-400 text-xs italic">
               Some tips - as long as needed
             </p>
           </div>
@@ -58,7 +56,7 @@ export default function Contectus() {
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="block uppercase tracking-wide text-white text-xs font-bold mb-2"
               for="grid-password"
             >
               Message
@@ -67,7 +65,7 @@ export default function Contectus() {
               class="no-resize appearance-none block w-full bg-gray-900 text-white placeholder-white border border-gray-200 rounded py-3 px-4 mb-3 leading-tight  h-48 resize-none"
               id="message"
             ></textarea>
-            <p class="text-gray-600 text-xs italic">
+            <p class="text-gray-400 text-xs italic">
               Re-size can be disabled by set by resize-none / resize-y /
               resize-x / resize
             </p>

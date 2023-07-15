@@ -7,7 +7,9 @@ export default function Feature() {
         <div class="container px-6 py-10 mx-auto">
           <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
             explore our awesome
-            <span class="underline decoration-blue-500 mr-8">{"           "}Features</span>
+            <span class="underline decoration-blue-500 mr-8">
+              {"           "}Features
+            </span>
           </h1>
 
           <p class="mt-4 text-gray-500 xl:mt-6 dark:text-gray-300"></p>
@@ -51,7 +53,7 @@ export default function Feature() {
 
               <a
                 href="#"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
