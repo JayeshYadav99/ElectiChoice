@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams,Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const StudentSubject = () => {
   const { id } = useParams();
@@ -14,65 +14,66 @@ const StudentSubject = () => {
     fetchStudent(id);
     fetchElectiveSubjects();
     console.log(id);
-   
   }, [id]);
 
   const fetchStudent = async (studentId) => {
     try {
       const response = await axios.get(`http://localhost:4000/student/getstudent/${studentId}`);
-      console.log(response.data[0])
+      console.log(response.data[0]);
       setStudent(response.data[0]);
       fetchAssignedSubjects(response.data[0]._id);
     } catch (error) {
       console.error(error);
-      // Handle the error
     }
   };
 
   const fetchElectiveSubjects = async () => {
     try {
       const response = await axios.get(`http://localhost:4000/subject/allsubjects`);
-      setElectiveSubjects(response.data);
+      const allSubjects = response.data;
+  
+      // Filter out the assigned subjects
+      const unassignedSubjects = allSubjects.filter((subject) => {
+        return !assignedSubjects.find((assignedSubject) => assignedSubject._id === subject._id);
+      });
+  
+      setElectiveSubjects(unassignedSubjects);
     } catch (error) {
       console.error(error);
-      // Handle the error
     }
   };
+  
 
   const fetchAssignedSubjects = async (studentId) => {
     try {
-      
       const response = await axios.get(`http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`);
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);
       setAssignedSubjects(subjects);
+      fetchElectiveSubjects();
     } catch (error) {
       console.error(error);
-      // Handle the error
-      throw error;
     }
   };
 
   const assignSubject = async () => {
     try {
-        console.log(selectedSubject);
+      console.log(selectedSubject);
       const response = await axios.post(`http://localhost:4000/main/addElectiveSubjectToStudent`, {
-        studentId:student._id,
+        studentId: student._id,
         electiveSubjectId: selectedSubject,
       });
       console.log(response.data);
-      // Update the student data or show a success message
       fetchAssignedSubjects(id);
       fetchStudent(id);
       setSelectedSubject(null);
     } catch (error) {
       console.error(error);
-      // Handle the error
     }
   };
 
-  const handleSubjectChange = (event) => {
-    setSelectedSubject(event.target.value);
+  const handleSubjectClick = (subject) => {
+    setSelectedSubject(subject);
   };
 
   const handleDelete = (subject) => {
@@ -88,20 +89,17 @@ const StudentSubject = () => {
           electiveSubjectId: selectedSubject._id,
         },
       });
-      // Display a success message or update the subject list
       fetchAssignedSubjects(student._id);
     } catch (error) {
       console.error(error);
-      // Display an error message
     }
     setShowModal(false);
   };
-  
+
   const cancelDelete = () => {
     setSelectedSubject(null);
     setShowModal(false);
   };
-
 
   return (
     <div className="mb-8">
@@ -115,7 +113,7 @@ const StudentSubject = () => {
         </div>
       )}
 
-      <div className="  mb-8">
+      <div className="mb-8">
         <h3>Assigned Elective Subjects</h3>
         {assignedSubjects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -125,23 +123,14 @@ const StudentSubject = () => {
                 <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
                 <p>{subject.subjectDescription}</p>
                 <div className="mt-4">
-              <Link
-to={{
-    pathname: `/edit-student-subject/${student._id}/${subject._id}`,
-  
-  }}
-                className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
-              >
-                Edit
-              </Link>
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded"
-                onClick={() => handleDelete(subject)}
-                data-modal-toggle="popup-modal"
-              >
-                Delete
-              </button>
-            </div>
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded"
+                    onClick={() => handleDelete(subject)}
+                    data-modal-toggle="popup-modal"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -150,20 +139,44 @@ to={{
         )}
       </div>
 
-      <h3 className=" mb-4">Assign Elective Subject</h3>
-      <div className="flex">
-        <select value={selectedSubject} onChange={handleSubjectChange} className="mr-4">
-          <option value="">Select an Elective Subject</option>
+      <h3 className="mb-4">Assign Elective Subject</h3>
+      <div className="flex flex-col">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {electiveSubjects.map((subject) => (
-            <option key={subject._id} value={subject._id}>
-              {subject.subjectName}
-            </option>
+            <div
+              key={subject._id}
+              className={`border border-gray-300 p-4 rounded cursor-pointer ${
+                selectedSubject?._id === subject._id ? "bg-blue-100" : ""
+              }`}
+              onClick={() => handleSubjectClick(subject)}
+            >
+              <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
+              <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
+              <p>{subject.subjectDescription}</p>
+            </div>
           ))}
-        </select>
-        <button onClick={assignSubject} disabled={!selectedSubject} className="bg-blue-500 text-white px-4 py-2 rounded">
+        </div>
+        {selectedSubject && (
+  <div className="mt-8">
+    <h3>Selected Elective Subject</h3>
+    <div className="border border-gray-300 p-4 rounded w-64">
+      <h2 className="text-lg font-bold mb-2">{selectedSubject.subjectName}</h2>
+      <p className="text-gray-500 mb-4">{selectedSubject.subjectCode}</p>
+      <p>{selectedSubject.subjectDescription}</p>
+    </div>
+  </div>
+)}
+        <button
+          onClick={assignSubject}
+          disabled={!selectedSubject}
+          className="bg-blue-500 text-white px-4 py-2 rounded self-center mt-4"
+        >
           Assign Subject
         </button>
+       
+
       </div>
+
       {showModal && (
         <div
           id="popup-modal"
