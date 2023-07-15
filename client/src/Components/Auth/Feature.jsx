@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Feature() {
   return (
@@ -51,8 +52,8 @@ export default function Feature() {
                 database.
               </p>
 
-              <a
-                href="#"
+              <Link
+                to="Student"
                 class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white "
               >
                 <svg
@@ -69,7 +70,7 @@ export default function Feature() {
                     d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
 
             <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
@@ -100,8 +101,8 @@ export default function Feature() {
                 subjects, including their names, descriptions, and codes.
               </p>
 
-              <a
-                href="#"
+              <Link
+                to="subject"
                 class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
               >
                 <svg
@@ -118,7 +119,7 @@ export default function Feature() {
                     d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
 
             <div class="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
@@ -150,8 +151,8 @@ export default function Feature() {
                 subjects for that student.
               </p>
 
-              <a
-                href="#"
+              <Link
+                to="add-subject"
                 class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
               >
                 <svg
@@ -168,7 +169,7 @@ export default function Feature() {
                     d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
