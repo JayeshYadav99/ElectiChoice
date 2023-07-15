@@ -51,6 +51,7 @@ exports.addElectiveSubjectToStudent = async (req, res) => {
       const { id } = req.params;
       
       const student = await Student.findOne({_id:id});
+      
       if (!student) {
         return res.status(404).json({ error: 'Student not found' });
       }
@@ -66,6 +67,7 @@ exports.addElectiveSubjectToStudent = async (req, res) => {
     try {
       const { id } = req.params;
       const electiveSubject = await ElectiveSubject.findById(id);
+      console.log("hello");
   console.log(electiveSubject);
       if (!electiveSubject) {
         return res.status(404).json({ error: 'Elective subject not found' });
@@ -73,6 +75,7 @@ exports.addElectiveSubjectToStudent = async (req, res) => {
   
       const studentElectiveSubjects = await StudentElectiveSubject.find({ electiveSubject: electiveSubject._id })
         .populate('student', ['name', 'idNumber', 'email', 'phoneNumber']);
+        console.log(studentElectiveSubjects);
   
       res.json(studentElectiveSubjects);
     } catch (error) {
@@ -115,6 +118,7 @@ exports.addStudentToElectiveSubject = async (req, res) => {
       const { studentId, electiveSubjectId } = req.body;
       const student = await Student.findById(studentId);
       const electiveSubject = await ElectiveSubject.findById(electiveSubjectId);
+  
   
       if (!student || !electiveSubject) {
         return res.status(404).json({ error: 'Student or Elective subject not found' });
