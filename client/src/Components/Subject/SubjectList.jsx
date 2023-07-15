@@ -12,6 +12,7 @@ const ElectiveSubjectPage = () => {
   const [subjects, setSubjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
+
   const filteredSubjects = subjects.filter((subject) =>
   subject.subjectName.toLowerCase().includes(searchQuery.toLowerCase())
 );
@@ -59,15 +60,25 @@ const ElectiveSubjectPage = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Elective Subjects</h1>
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search subjects..."
-          value={searchQuery}
-          onChange={handleSearch}
-          className="border border-gray-300 px-3 py-2 rounded"
-        />
-      </div>
+      <div className="mb-4 ml-3">
+  <div className="relative ">
+    <input
+      type="text"
+      placeholder="Search subjects..."
+      value={searchQuery}
+      onChange={handleSearch}
+      className="border border-gray-300 px-3 py-2 pl-8 rounded"
+    />
+    <span className="absolute top-3 left-2">
+      <img
+        src="search.png"
+        alt="Search Icon"
+        className="w-4 h-4 text-gray-500"
+      />
+    </span>
+  </div>
+</div>
+
       
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

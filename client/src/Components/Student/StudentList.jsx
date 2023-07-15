@@ -5,6 +5,15 @@ const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+
+  const filteredStudents = students.filter((student) =>
+  student.name.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
   useEffect(() => {
     fetchStudents();
@@ -51,8 +60,26 @@ const StudentList = () => {
  
         <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Student List</h2>
+      <div className="mb-4 ml-3">
+  <div className="relative ">
+    <input
+      type="text"
+      placeholder="Search Students..."
+      value={searchQuery}
+      onChange={handleSearch}
+      className="border border-gray-300 px-3 py-2 pl-8 rounded"
+    />
+    <span className="absolute top-3 left-2">
+      <img
+        src="search.png"
+        alt="Search Icon"
+        className="w-4 h-4 text-gray-500"
+      />
+    </span>
+  </div>
+</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {students.map((student) => (
+        {filteredStudents.map((student) => (
           <div
             key={student.id}
             className="bg-gray-800 border-blue-500 border-2 border-solid rounded shadow p-4 flex flex-col justify-between text-white"
