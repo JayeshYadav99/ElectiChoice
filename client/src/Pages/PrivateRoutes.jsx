@@ -6,7 +6,7 @@ export default function PrivateRoutes() {
   try {
     const cookies = new Cookies();
     const token = cookies.get('TOKEN');
-    alert("Checking");
+    // alert("Checking");
     if (token) {
       alert(token);
       return <Outlet />;

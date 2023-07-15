@@ -1,4 +1,4 @@
-const ElectiveSubject = require('../models/ElectiveSubjectModel');
+const ElectiveSubject = require('../Models/ElectiveSubjectModel');
 
 // Get all elective subjects
 exports.getAllSubjects = async (req, res) => {

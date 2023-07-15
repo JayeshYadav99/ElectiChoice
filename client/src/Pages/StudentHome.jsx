@@ -35,7 +35,7 @@ export default function StudentHome() {
             const { status, user } = response.data;
   
             if (status && user) {
-              alert(user.username);
+              // alert(user.username);
               console.log(user.username);
               setUsername(user.username);
             } else {

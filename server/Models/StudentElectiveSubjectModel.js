@@ -1,7 +1,6 @@
 
 const mongoose = require('mongoose');
-// const StudentModel =require('./StudentModel')
-// const ElectiveSubjectModel=require('./ELectiveSubjectModel')
+
 const studentElectiveSubjectSchema = new mongoose.Schema({
     student: {
       type: mongoose.Schema.Types.ObjectId,
