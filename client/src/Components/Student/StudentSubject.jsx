@@ -18,7 +18,9 @@ const StudentSubject = () => {
 
   const fetchStudent = async (studentId) => {
     try {
-      const response = await axios.get(`http://localhost:4000/student/getstudent/${studentId}`);
+      const response = await axios.get(
+        `http://localhost:4000/student/getstudent/${studentId}`
+      );
       console.log(response.data[0]);
       setStudent(response.data[0]);
       fetchAssignedSubjects(response.data[0]._id);
@@ -29,24 +31,29 @@ const StudentSubject = () => {
 
   const fetchElectiveSubjects = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/subject/allsubjects`);
+      const response = await axios.get(
+        `http://localhost:4000/subject/allsubjects`
+      );
       const allSubjects = response.data;
-  
+
       // Filter out the assigned subjects
       const unassignedSubjects = allSubjects.filter((subject) => {
-        return !assignedSubjects.find((assignedSubject) => assignedSubject._id === subject._id);
+        return !assignedSubjects.find(
+          (assignedSubject) => assignedSubject._id === subject._id
+        );
       });
-  
+
       setElectiveSubjects(unassignedSubjects);
     } catch (error) {
       console.error(error);
     }
   };
-  
 
   const fetchAssignedSubjects = async (studentId) => {
     try {
-      const response = await axios.get(`http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`);
+      const response = await axios.get(
+        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`
+      );
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);
       setAssignedSubjects(subjects);
@@ -59,10 +66,13 @@ const StudentSubject = () => {
   const assignSubject = async () => {
     try {
       console.log(selectedSubject);
-      const response = await axios.post(`http://localhost:4000/main/addElectiveSubjectToStudent`, {
-        studentId: student._id,
-        electiveSubjectId: selectedSubject,
-      });
+      const response = await axios.post(
+        `http://localhost:4000/main/addElectiveSubjectToStudent`,
+        {
+          studentId: student._id,
+          electiveSubjectId: selectedSubject,
+        }
+      );
       console.log(response.data);
       fetchAssignedSubjects(id);
       fetchStudent(id);
@@ -83,12 +93,15 @@ const StudentSubject = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/main/removeElectiveSubjectFromStudent`, {
-        data: {
-          studentId: student._id,
-          electiveSubjectId: selectedSubject._id,
-        },
-      });
+      await axios.delete(
+        `http://localhost:4000/main/removeElectiveSubjectFromStudent`,
+        {
+          data: {
+            studentId: student._id,
+            electiveSubjectId: selectedSubject._id,
+          },
+        }
+      );
       fetchAssignedSubjects(student._id);
     } catch (error) {
       console.error(error);
@@ -102,26 +115,33 @@ const StudentSubject = () => {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-8 bg-gray-900">
       {student && (
-        <div className="bg-white shadow rounded p-4 mb-4 mt-4  mx-auto max-w-sm border border-blue-500">
-          <h3 className="text-lg font-medium">{student.name}</h3>
-          <p className="text-gray-500">ID: {student.idNumber}</p>
-          <p className="text-gray-500">iD: {student._id}</p>
-          <p className="text-gray-500">Email: {student.email}</p>
-          <p className="text-gray-500">Phone: {student.phoneNumber}</p>
+        <div className=" shadow rounded p-4 mb-4 mt-4  mx-auto max-w-sm border border-blue-500 m-3">
+          <h3 className="text-white text-lg font-medium">{student.name}</h3>
+          <p className="text-white">ID: {student.idNumber}</p>
+          <p className="text-white">iD: {student._id}</p>
+          <p className="text-white">Email: {student.email}</p>
+          <p className="text-white">Phone: {student.phoneNumber}</p>
         </div>
       )}
 
       <div className="mb-8">
-        <h3>Assigned Elective Subjects</h3>
+        <h3 className="text-2xl text-gray-900  dark:text-white text-center font-bold mb-5">
+          Assigned Elective Subjects
+        </h3>
         {assignedSubjects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {assignedSubjects.map((subject) => (
-              <div key={subject._id} className="border border-gray-300 p-4 rounded">
-                <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
-                <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
-                <p>{subject.subjectDescription}</p>
+              <div
+                key={subject._id}
+                className="border border-blue-500 p-4 rounded"
+              >
+                <h2 className="text-lg font-bold mb-2 text-white">
+                  {subject.subjectName}
+                </h2>
+                <p className="text-white mb-4">{subject.subjectCode}</p>
+                <p className="text-white">{subject.subjectDescription}</p>
                 <div className="mt-4">
                   <button
                     className="bg-red-500 text-white px-4 py-2 rounded"
@@ -139,33 +159,43 @@ const StudentSubject = () => {
         )}
       </div>
 
-      <h3 className="mb-4">Assign Elective Subject</h3>
+      <h3 className="text-white text-center text-2xl mb-3 font-bold">
+        Assign Elective Subject
+      </h3>
       <div className="flex flex-col">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {electiveSubjects.map((subject) => (
             <div
               key={subject._id}
-              className={`border border-gray-300 p-4 rounded cursor-pointer ${
+              className={`border border-blue-600 p-4 rounded cursor-pointer ${
                 selectedSubject?._id === subject._id ? "bg-blue-100" : ""
               }`}
               onClick={() => handleSubjectClick(subject)}
             >
-              <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
-              <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
-              <p>{subject.subjectDescription}</p>
+              <h2 className="text-lg font-medium text-gray-900 dark:text-white">
+                {subject.subjectName}
+              </h2>
+              <p className="tracking-tighter text-gray-500 md:text-lg dark:text-gray-400">
+                {subject.subjectCode}
+              </p>
+              <p className="mb-3 text-white dark:text-gray-400">
+                {subject.subjectDescription}
+              </p>
             </div>
           ))}
         </div>
         {selectedSubject && (
-  <div className="mt-8">
-    <h3>Selected Elective Subject</h3>
-    <div className="border border-gray-300 p-4 rounded w-64">
-      <h2 className="text-lg font-bold mb-2">{selectedSubject.subjectName}</h2>
-      <p className="text-gray-500 mb-4">{selectedSubject.subjectCode}</p>
-      <p>{selectedSubject.subjectDescription}</p>
-    </div>
-  </div>
-)}
+          <div className="mt-8">
+            <h3>Selected Elective Subject</h3>
+            <div className="border border-gray-300 p-4 rounded w-64">
+              <h2 className="text-lg font-bold mb-2">
+                {selectedSubject.subjectName}
+              </h2>
+              <p className="text-white mb-4">{selectedSubject.subjectCode}</p>
+              <p>{selectedSubject.subjectDescription}</p>
+            </div>
+          </div>
+        )}
         <button
           onClick={assignSubject}
           disabled={!selectedSubject}
@@ -173,8 +203,6 @@ const StudentSubject = () => {
         >
           Assign Subject
         </button>
-       
-
       </div>
 
       {showModal && (
@@ -223,7 +251,7 @@ const StudentSubject = () => {
                   d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
-              <h3 className="mb-5 text-lg font-normal text-gray-500">
+              <h3 className="mb-5 text-lg font-normal text-white">
                 Are you sure you want to delete this subject?
               </h3>
               <button
@@ -237,7 +265,7 @@ const StudentSubject = () => {
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
+                className="text-white bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
                 onClick={cancelDelete}
               >
                 No, cancel

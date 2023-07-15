@@ -118,7 +118,7 @@ const StudentList = () => {
               </svg>
               <span className="sr-only">Close modal</span>
             </button>
-            <div className="p-6 text-center">
+            <div className="p-6 text-center bg-gray-900">
               <svg
                 className="mx-auto mb-4 text-gray-400 w-12 h-12"
                 aria-hidden="true"
@@ -134,7 +134,7 @@ const StudentList = () => {
                   d="M10 11V6m0 0 6-6M10 11h4m-4 0H6"
                 />
               </svg>
-              <h3 className="mb-5 text-lg font-normal text-gray-500">
+              <h3 className="mb-5 text-lg font-normal text-white">
                 Are you sure you want to delete this student?
               </h3>
               <button

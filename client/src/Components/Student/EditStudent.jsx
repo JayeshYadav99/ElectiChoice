@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 const EditStudent = () => {
   const { id } = useParams();
   const studentId = id;
-  
+
   const [studentData, setStudentData] = useState({
     name: "",
     idNumber: "",
@@ -39,9 +39,12 @@ const EditStudent = () => {
 
   const handleSave = async () => {
     try {
-           console.log(studentData);
+      console.log(studentData);
 
-      await axios.put(`http://localhost:4000/student/UpdateStudent/${studentId}`, studentData);
+      await axios.put(
+        `http://localhost:4000/student/UpdateStudent/${studentId}`,
+        studentData
+      );
       // Display a success message or redirect to the student list
     } catch (error) {
       console.error(error);
@@ -50,11 +53,11 @@ const EditStudent = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Edit Student</h2>
+    <div className="container mx-auto p-4 bg-gray-900">
+      <h2 className="text-2xl font-bold mb-4 text-white">Edit Student</h2>
       <form>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-white text-sm font-bold mb-2">
             Name
           </label>
           <input
@@ -62,11 +65,11 @@ const EditStudent = () => {
             name="name"
             value={studentData.name}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-red-200 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-white text-sm font-bold mb-2">
             ID Number
           </label>
           <input
@@ -74,11 +77,11 @@ const EditStudent = () => {
             name="idNumber"
             value={studentData.idNumber}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-white text-sm font-bold mb-2">
             Email
           </label>
           <input
@@ -86,11 +89,11 @@ const EditStudent = () => {
             name="email"
             value={studentData.email}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block text-white text-sm font-bold mb-2">
             Phone Number
           </label>
           <input
@@ -98,7 +101,7 @@ const EditStudent = () => {
             name="phoneNumber"
             value={studentData.phoneNumber}
             onChange={handleInputChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="flex justify-end">
