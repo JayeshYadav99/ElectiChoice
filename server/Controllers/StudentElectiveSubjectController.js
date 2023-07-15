@@ -64,17 +64,22 @@ exports.addElectiveSubjectToStudent = async (req, res) => {
   // Get all students for an elective subject
   exports.getStudentsForElectiveSubject = async (req, res) => {
     try {
-      const { electiveSubjectId } = req.params;
-      const electiveSubject = await ElectiveSubject.findById(electiveSubjectId);
+      const { id } = req.params;
+      const electiveSubject = await ElectiveSubject.findById(id);
+  console.log(electiveSubject);
       if (!electiveSubject) {
         return res.status(404).json({ error: 'Elective subject not found' });
       }
-      const studentElectiveSubjects = await StudentElectiveSubject.find({ electiveSubject: electiveSubject._id }).populate('student');
+  
+      const studentElectiveSubjects = await StudentElectiveSubject.find({ electiveSubject: electiveSubject._id })
+        .populate('student', ['name', 'idNumber', 'email', 'phoneNumber']);
+  
       res.json(studentElectiveSubjects);
     } catch (error) {
       res.status(500).json({ error: 'Internal server error' });
     }
   };
+  
   // Edit the subject details of a student
   exports.editSubjectOfStudent = async (req, res) => {
     try {
@@ -104,4 +109,50 @@ exports.addElectiveSubjectToStudent = async (req, res) => {
     }
   };
   
+  // Add a student to an elective subject
+exports.addStudentToElectiveSubject = async (req, res) => {
+    try {
+      const { studentId, electiveSubjectId } = req.body;
+      const student = await Student.findById(studentId);
+      const electiveSubject = await ElectiveSubject.findById(electiveSubjectId);
   
+      if (!student || !electiveSubject) {
+        return res.status(404).json({ error: 'Student or Elective subject not found' });
+      }
+  
+      const studentElectiveSubject = new StudentElectiveSubject({
+        student: student._id,
+        electiveSubject: electiveSubject._id
+      });
+  
+      const savedStudentElectiveSubject = await studentElectiveSubject.save();
+      res.json(savedStudentElectiveSubject);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };
+  
+  exports.removeStudentFromElectiveSubject = async (req, res) => {
+    try {
+      const { studentId, electiveSubjectId } = req.body;
+      const student = await Student.findById(studentId);
+      const electiveSubject = await ElectiveSubject.findById(electiveSubjectId);
+  
+      if (!student || !electiveSubject) {
+        return res.status(404).json({ error: 'Student or Elective subject not found' });
+      }
+  
+      const removedStudentElectiveSubject = await StudentElectiveSubject.findOneAndDelete({
+        student: student._id,
+        electiveSubject: electiveSubject._id,
+      });
+  
+      if (!removedStudentElectiveSubject) {
+        return res.status(404).json({ error: 'Student-Elective subject relationship not found' });
+      }
+  
+      res.json({ message: 'Student removed from elective subject successfully' });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  };

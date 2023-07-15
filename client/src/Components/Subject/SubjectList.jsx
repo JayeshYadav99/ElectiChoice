@@ -58,6 +58,12 @@ const ElectiveSubjectPage = () => {
               >
                 Edit
               </Link>
+              <Link
+                to={`/add-student-to-subject/${subject._id}`}
+                className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+              >
+                Add Student
+              </Link>
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded"
                 onClick={() => handleDelete(subject)}
