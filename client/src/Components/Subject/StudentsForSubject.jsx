@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import SubjectNavbar from '../SubjectNavbar';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import SubjectNavbar from "../SubjectNavbar";
 
 const StudentsForSubject = () => {
   const { id } = useParams();
@@ -20,8 +20,6 @@ const StudentsForSubject = () => {
     // fetchAllStudents();
   }, [studentsForSubject]);
 
-
-
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
       const response = await axios.get(
@@ -36,13 +34,17 @@ const StudentsForSubject = () => {
 
   const fetchAllStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/student/allstudents');
+      const response = await axios.get(
+        "http://localhost:4000/student/allstudents"
+      );
       console.log(studentsForSubject);
       const allStudents = response.data.filter((student) => {
-        return !studentsForSubject.some((assignedStudent) => assignedStudent._id === student._id);
+        return !studentsForSubject.some(
+          (assignedStudent) => assignedStudent._id === student._id
+        );
       });
-  console.log(allStudents);
-      
+      console.log(allStudents);
+
       setAllStudents(allStudents);
     } catch (error) {
       console.error(error);
@@ -100,10 +102,12 @@ const StudentsForSubject = () => {
     setShowModal(false);
   };
   return (
-    <div>
-          <SubjectNavbar/>
-        
-      <h1 className="text-2xl font-bold mb-4">Students for Subject {subjectCode}</h1>
+    <div className="bg-gray-900 text-white">
+      <SubjectNavbar />
+
+      <h1 className="text-2xl font-bold mb-4 text-center mt-0">
+        Students for Subject {subjectCode}
+      </h1>
 
       <h2 className="text-lg font-bold mb-2">Students for Subject:</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -114,9 +118,9 @@ const StudentsForSubject = () => {
             onClick={() => handleCardClick(student)}
           >
             <h2 className="text-lg font-bold mb-2">{student.name}</h2>
-            <p className="text-gray-500">ID: {student.idNumber}</p>
-            <p className="text-gray-500">Email: {student.email}</p>
-            <p className="text-gray-500">Phone: {student.phoneNumber}</p>
+            <p className="text-white">ID: {student.idNumber}</p>
+            <p className="text-white">Email: {student.email}</p>
+            <p className="text-white">Phone: {student.phoneNumber}</p>
             <button
               className="bg-red-500 text-white px-4 py-2 rounded mt-4"
               onClick={() => handleDelete(student)}
@@ -127,37 +131,34 @@ const StudentsForSubject = () => {
           </div>
         ))}
       </div>
-<div className='mb-8'>
-<h2 className="text-lg font-bold mb-2 mt-4">All Students:</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {allStudents.map((student) => (
-          <div
-            key={student._id}
-            className={`border border-gray-300 p-4 rounded cursor-pointer ${
-              selectedStudent?._id === student._id ? "bg-blue-100" : ""
-            }`}
-            onClick={() => handleCardClick(student)}
-          >
-            <h2 className="text-lg font-bold mb-2">{student.name}</h2>
-            <p className="text-gray-500">ID: {student.idNumber}</p>
-            <p className="text-gray-500">Email: {student.email}</p>
-            <p className="text-gray-500">Phone: {student.phoneNumber}</p>
-          </div>
-        ))}
+      <div className="mb-8">
+        <h2 className="text-lg font-bold mb-2 mt-4">All Students:</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {allStudents.map((student) => (
+            <div
+              key={student._id}
+              className={`border border-gray-300 p-4 rounded cursor-pointer ${
+                selectedStudent?._id === student._id ? "bg-blue-100" : ""
+              }`}
+              onClick={() => handleCardClick(student)}
+            >
+              <h2 className="text-lg font-bold mb-2">{student.name}</h2>
+              <p className="text-white">ID: {student.idNumber}</p>
+              <p className="text-white">Email: {student.email}</p>
+              <p className="text-white">Phone: {student.phoneNumber}</p>
+            </div>
+          ))}
+        </div>
       </div>
-</div>
-     
 
       {selectedStudent && (
         <div>
           <h2 className="text-lg font-bold mt-4">Selected Student</h2>
           <div className="border border-gray-300 p-4 rounded">
             <h2 className="text-lg font-bold mb-2">{selectedStudent.name}</h2>
-            <p className="text-gray-500">ID: {selectedStudent.idNumber}</p>
-            <p className="text-gray-500">Email: {selectedStudent.email}</p>
-            <p className="text-gray-500">
-              Phone: {selectedStudent.phoneNumber}
-            </p>
+            <p className="text-white">ID: {selectedStudent.idNumber}</p>
+            <p className="text-white">Email: {selectedStudent.email}</p>
+            <p className="text-white">Phone: {selectedStudent.phoneNumber}</p>
           </div>
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
@@ -213,7 +214,7 @@ const StudentsForSubject = () => {
                   d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                 />
               </svg>
-              <h3 className="mb-5 text-lg font-normal text-gray-500">
+              <h3 className="mb-5 text-lg font-normal text-white">
                 Are you sure you want to delete this student?
               </h3>
               <button
@@ -227,7 +228,7 @@ const StudentsForSubject = () => {
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
+                className="text-white bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
                 onClick={cancelDelete}
               >
                 No, cancel

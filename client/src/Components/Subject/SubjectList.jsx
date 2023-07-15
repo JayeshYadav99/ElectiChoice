@@ -56,32 +56,32 @@ const ElectiveSubjectPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Elective Subjects</h1>
+    <div className="flex flex-col items-center bg-gray-900">
+      <h1 className="text-2xl font-bold mb-4 text-white">Elective Subjects</h1>
       <div className="mb-4 ml-3">
-  <div className="relative ">
-    <input
-      type="text"
-      placeholder="Search Students..."
-      value={searchQuery}
-      onChange={handleSearch}
-      className="border border-gray-300 px-3 py-2 pl-8 rounded"
-    />
-    <span className="absolute top-3 left-2">
-      <img
-        src="search.png"
-        alt="Search Icon"
-        className="w-4 h-4 text-gray-500"
-      />
-    </span>
-  </div>
-</div>
+        <div className="relative">
+          <input
+            type="text"
+            placeholder="Search subjects..."
+            value={searchQuery}
+            onChange={handleSearch}
+            className="border border-gray-300 px-3 py-2 pl-8 rounded"
+          />
+          <span className="absolute top-3 left-2">
+            <img
+              src="search.png"
+              alt="Search Icon"
+              className="w-4 h-4 text-gray-500"
+            />
+          </span>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredSubjects.map((subject) => (
           <div
             key={subject.subjectCode}
-            className="border border-gray-300 p-4 rounded"
+            className="border-2 border-white cursor-pointer p-4 rounded text-white mr-2 ml-2"
           >
             <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
             <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
@@ -154,7 +154,7 @@ const ElectiveSubjectPage = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  d="M10 11V6m0 0 6-6M10 11h6m-6 0H4m6 0v6m0-6V4"
                 />
               </svg>
               <h3 className="mb-5 text-lg font-normal text-gray-500">
