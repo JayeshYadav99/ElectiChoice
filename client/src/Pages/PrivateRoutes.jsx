@@ -8,7 +8,7 @@ export default function PrivateRoutes() {
     const token = cookies.get('TOKEN');
     // alert("Checking");
     if (token) {
-      alert(token);
+      // alert(token);
       return <Outlet />;
     } else {
       const location = useLocation();

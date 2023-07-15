@@ -24,7 +24,7 @@ module.exports.authMiddleware = (requiredRoles) => {
         req.user = user;
 
         const { role } = user;
-        console.log(role);
+        // console.log(role);
         if (!hasRequiredRole(role, requiredRoles)) {
           return res.status(403).json({ message: "Access denied. Insufficient role." });
         }
