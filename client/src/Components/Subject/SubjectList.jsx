@@ -23,7 +23,8 @@ const ElectiveSubjectPage = () => {
   const fetchSubjects = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/subject/allsubjects",{withCredentials: true},
+        "http://localhost:4000/subject/allsubjects",
+        { withCredentials: true }
       );
       setSubjects(response.data);
     } catch (error) {
@@ -39,7 +40,8 @@ const ElectiveSubjectPage = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:4000/subject/deleteSubject/${selectedSubject.subjectCode}`,{withCredentials: true},
+        `http://localhost:4000/subject/deleteSubject/${selectedSubject.subjectCode}`,
+        { withCredentials: true }
       );
       // Display a success message or update the subject list
       fetchSubjects();
