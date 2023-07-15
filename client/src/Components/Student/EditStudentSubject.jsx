@@ -27,7 +27,7 @@ const EditStudentSubject = () => {
   const fetchSubjectDetails = async (studentId) => {
     try {
       if (studentId && electiveSubjectId) {
-        const response = await axios.get(`http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`);
+        const response = await axios.get(`http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`,{withCredentials: true},);
         const subject = response.data.find(item => item.electiveSubject._id === electiveSubjectId);
         
         if (subject) {

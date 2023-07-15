@@ -23,7 +23,7 @@ const StudentsForSubject = () => {
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`
+        `http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`,{withCredentials: true},
       );
       const students = response.data.map((item) => item.student);
       setStudentsForSubject(students);
@@ -34,9 +34,7 @@ const StudentsForSubject = () => {
 
   const fetchAllStudents = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:4000/student/allstudents"
-      );
+      const response = await axios.get('http://localhost:4000/student/allstudents',{withCredentials: true},);
       console.log(studentsForSubject);
       const allStudents = response.data.filter((student) => {
         return !studentsForSubject.some(
@@ -62,7 +60,7 @@ const StudentsForSubject = () => {
         {
           studentId: selectedStudent._id,
           electiveSubjectId: subjectCode,
-        }
+        },{withCredentials: true}
       );
       // Clear the selected student and refetch the students for the subject
       setSelectedStudent(null);
@@ -88,6 +86,7 @@ const StudentsForSubject = () => {
             electiveSubjectId: subjectCode,
           },
         }
+        ,{withCredentials: true},
       );
       // Remove the student from the state
       fetchStudentsForSubject(subjectCode);

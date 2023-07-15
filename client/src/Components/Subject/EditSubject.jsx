@@ -20,7 +20,7 @@ const EditSubject = () => {
   const fetchSubjectData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/subject/getsubject/${subjectId}`
+        `http://localhost:4000/subject/getsubject/${subjectId}`,{withCredentials: true},
       );
       console.log(response.data);
       setSubjectData(response.data);
@@ -41,7 +41,7 @@ const EditSubject = () => {
     try {
       await axios.put(
         `http://localhost:4000/subject/updateSubject/${subjectId}`,
-        subjectData
+        subjectData,{withCredentials: true},
       );
       // Display a success message or redirect to the subject list
     } catch (error) {

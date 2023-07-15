@@ -22,7 +22,7 @@ const StudentList = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/student/allstudents"
+        "http://localhost:4000/student/allstudents",{withCredentials: true},
       );
       console.log(response.data[0]);
       setStudents(response.data);
@@ -39,7 +39,7 @@ const StudentList = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:4000/student/DeleteStudent/${selectedStudent.idNumber}`
+        `http://localhost:4000/student/DeleteStudent/${selectedStudent.idNumber}`,{withCredentials: true},
       );
       // Display a success message or update the student list
       fetchStudents();

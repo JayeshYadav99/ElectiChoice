@@ -33,15 +33,15 @@ app.use(
 //     optionSuccessStatus:200
 // }
 // app.use(cors(corsOrigin));
-
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/main",StudentElectiveSubjectRoute);
-app.use("/student", StudentRoute);
+app.use("/student" ,authMiddleware, StudentRoute);
 app.use("/subject",SubjectRoute);
 app.get("/yaae", authMiddleware, (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
   res.json({ status: true, user: req.user });
 });
 

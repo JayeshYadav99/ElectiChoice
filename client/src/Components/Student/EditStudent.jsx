@@ -20,7 +20,7 @@ const EditStudent = () => {
   const fetchStudentData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/student/getstudent/${studentId}`
+        `http://localhost:4000/student/getstudent/${studentId}`,{withCredentials: true},
       );
       console.log(response.data[0].name);
       setStudentData(response.data[0]);
@@ -43,7 +43,7 @@ const EditStudent = () => {
 
       await axios.put(
         `http://localhost:4000/student/UpdateStudent/${studentId}`,
-        studentData
+        studentData,{withCredentials: true}
       );
       // Display a success message or redirect to the student list
     } catch (error) {

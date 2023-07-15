@@ -28,7 +28,7 @@ const StudentSubject = () => {
   const fetchStudent = async (studentId) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/student/getstudent/${studentId}`
+        `http://localhost:4000/student/getstudent/${studentId}`,{withCredentials: true},
       );
       console.log(response.data[0]);
       setStudent(response.data[0]);
@@ -42,7 +42,7 @@ const StudentSubject = () => {
   const fetchElectiveSubjects = async () => {
     try {
         console.log("called---------------------------->");
-      const response = await axios.get(`http://localhost:4000/subject/allsubjects`);
+      const response = await axios.get(`http://localhost:4000/subject/allsubjects`,{withCredentials: true},);
       const allSubjects = response.data;
      console.log(assignedSubjects)
       // Filter out the assigned subjects
@@ -62,7 +62,7 @@ const StudentSubject = () => {
   const fetchAssignedSubjects = async (studentId) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`
+        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`,
       );
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);
@@ -83,7 +83,8 @@ const StudentSubject = () => {
         {
           studentId: student._id,
           electiveSubjectId: selectedSubject,
-        }
+        },
+        {withCredentials: true},
       );
       console.log(response.data);
       fetchAssignedSubjects(id);
@@ -112,7 +113,7 @@ const StudentSubject = () => {
             studentId: student._id,
             electiveSubjectId: selectedSubject._id,
           },
-        }
+        },{withCredentials: true}
       );
       fetchAssignedSubjects(student._id);
     } catch (error) {

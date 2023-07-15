@@ -37,7 +37,7 @@ const SubjectForm = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post("http://localhost:4000/subject/addsubject", formData)
+        .post("http://localhost:4000/subject/addsubject", formData,{withCredentials: true})
         .then((response) => {
           console.log(response.data);
           setFormData({

@@ -27,9 +27,9 @@ export default function StudentHome() {
           try {
             const response = await axios.get("http://localhost:4000/yaae", {
               withCredentials: true,
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
+              // headers: {
+              //   Authorization: `Bearer ${token}`,
+              // },
             });
   
             const { status, user } = response.data;

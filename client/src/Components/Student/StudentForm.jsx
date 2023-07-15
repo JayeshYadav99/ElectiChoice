@@ -42,7 +42,7 @@ const StudentForm = () => {
     if (validateForm()) {
       // Make API call to backend to create/update student record
       axios
-        .post("http://localhost:4000/student/addstudent", formData)
+        .post("http://localhost:4000/student/addstudent",formData, {withCredentials: true})
         .then((response) => {
           // Handle success response
           console.log(response.data);
