@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import StudentNavbar from "../StudentNavbar";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StudentForm = () => {
   const [formData, setFormData] = useState({
@@ -57,6 +59,7 @@ const StudentForm = () => {
           });
           // Clear errors
           setErrors({});
+          toast.success("Student added successfully!");
         })
         .catch((error) => {
           // Handle error response
@@ -169,6 +172,7 @@ const StudentForm = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
