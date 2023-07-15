@@ -16,7 +16,7 @@ export default function SubjectNavbar() {
             <a href="/add-subject" className="text-white hover:text-gray-200">
               Add Subject
             </a>
-            <Link to="subject" className="text-white hover:text-gray-200">
+            <Link to="/subject" className="text-white hover:text-gray-200">
               Subject List
             </Link>
             <a href="#" className="text-white hover:text-gray-200">
