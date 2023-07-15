@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
+import StudentNavbar from '../StudentNavbar';
 
 const StudentForm = () => {
   const [formData, setFormData] = useState({
@@ -63,11 +64,11 @@ const StudentForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
-      <div className="max-w-md w-full px-6 py-8  border-2 border-gray-300 shadow-lg rounded-md bg-gray-800">
-        <h2 className="text-2xl font-semibold mb-4 w-96 text-white">
-          Student Form
-        </h2>
+    <>
+    <StudentNavbar/>
+        <div className="flex justify-center items-center h-screen">
+      <div className="bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-semibold mb-4 w-96">Student Form</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block mb-1 font-medium text-white">
@@ -158,7 +159,8 @@ const StudentForm = () => {
           </button>
         </form>
       </div>
-    </div>
+    </div></>
+
   );
 };
 

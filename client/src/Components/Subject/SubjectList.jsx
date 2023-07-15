@@ -3,9 +3,19 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const ElectiveSubjectPage = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+ 
+
   const [subjects, setSubjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedSubject, setSelectedSubject] = useState(null);
+  const filteredSubjects = subjects.filter((subject) =>
+  subject.subjectName.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
 
   useEffect(() => {
     fetchSubjects();
@@ -49,12 +59,20 @@ const ElectiveSubjectPage = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold mb-4">Elective Subjects</h1>
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search subjects..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="border border-gray-300 px-3 py-2 rounded"
+        />
+      </div>
+      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {subjects.map((subject) => (
-          <div
-            key={subject.subjectCode}
-            className="border border-gray-300 p-4 rounded"
-          >
+        {filteredSubjects.map((subject) => (
+          <div key={subject.subjectCode} className="border border-gray-300 p-4 rounded">
             <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
             <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
             <p>{subject.subjectDescription}</p>

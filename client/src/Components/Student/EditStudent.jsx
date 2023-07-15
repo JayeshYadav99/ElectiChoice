@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-
+import { useParams } from 'react-router-dom';
+import StudentNavbar from "../StudentNavbar";
 const EditStudent = () => {
   const { id } = useParams();
   const studentId = id;
@@ -53,8 +53,10 @@ const EditStudent = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-900">
-      <h2 className="text-2xl font-bold mb-4 text-white">Edit Student</h2>
+    <>
+    <StudentNavbar/>
+        <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">Edit Student</h2>
       <form>
         <div className="mb-4">
           <label className="block text-white text-sm font-bold mb-2">
@@ -115,6 +117,8 @@ const EditStudent = () => {
         </div>
       </form>
     </div>
+    </>
+
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import SubjectNavbar from "../SubjectNavbar";
 
 const EditSubject = () => {
   const { id } = useParams();
@@ -50,7 +51,9 @@ const EditSubject = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-900">
+    <>
+    <SubjectNavbar/>
+        <div className="container mx-auto p-4 bg-gray-900">
       <h2 className="text-2xl font-bold mb-4">Edit Subject</h2>
       <form>
         <div className="mb-4">
@@ -98,7 +101,8 @@ const EditSubject = () => {
           </button>
         </div>
       </form>
-    </div>
+    </div></>
+
   );
 };
 

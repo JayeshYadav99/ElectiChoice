@@ -47,8 +47,10 @@ const StudentList = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-900">
-      <h2 className="text-2xl font-bold mb-4 text-white">Student List</h2>
+    <>
+ 
+        <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">Student List</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {students.map((student) => (
           <div
@@ -153,7 +155,8 @@ const StudentList = () => {
           </div>
         </div>
       )}
-    </div>
+    </div></>
+
   );
 };
 

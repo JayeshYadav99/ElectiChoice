@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import StudentNavbar from '../StudentNavbar'
 
 const StudentSubject = () => {
   const { id } = useParams();
@@ -12,9 +13,17 @@ const StudentSubject = () => {
 
   useEffect(() => {
     fetchStudent(id);
-    fetchElectiveSubjects();
-    console.log(id);
   }, [id]);
+  
+  useEffect(() => {
+    if (student) {
+      fetchAssignedSubjects(student._id);
+    }
+  }, [student]);
+  
+  useEffect(() => {
+    fetchElectiveSubjects();
+  }, [assignedSubjects]);
 
   const fetchStudent = async (studentId) => {
     try {
@@ -24,6 +33,7 @@ const StudentSubject = () => {
       console.log(response.data[0]);
       setStudent(response.data[0]);
       fetchAssignedSubjects(response.data[0]._id);
+    
     } catch (error) {
       console.error(error);
     }
@@ -31,18 +41,18 @@ const StudentSubject = () => {
 
   const fetchElectiveSubjects = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:4000/subject/allsubjects`
-      );
+        console.log("called---------------------------->");
+      const response = await axios.get(`http://localhost:4000/subject/allsubjects`);
       const allSubjects = response.data;
-
+     console.log(assignedSubjects)
       // Filter out the assigned subjects
       const unassignedSubjects = allSubjects.filter((subject) => {
         return !assignedSubjects.find(
           (assignedSubject) => assignedSubject._id === subject._id
         );
       });
-
+  
+  console.log(unassignedSubjects)
       setElectiveSubjects(unassignedSubjects);
     } catch (error) {
       console.error(error);
@@ -56,8 +66,10 @@ const StudentSubject = () => {
       );
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);
+      
       setAssignedSubjects(subjects);
-      fetchElectiveSubjects();
+    //   fetchElectiveSubjects();
+    
     } catch (error) {
       console.error(error);
     }
@@ -114,8 +126,9 @@ const StudentSubject = () => {
     setShowModal(false);
   };
 
-  return (
-    <div className="mb-8 bg-gray-900">
+  return (<>
+  <StudentNavbar/>
+      <div className="mb-8">
       {student && (
         <div className=" shadow rounded p-4 mb-4 mt-4  mx-auto max-w-sm border border-blue-500 m-3">
           <h3 className="text-white text-lg font-medium">{student.name}</h3>
@@ -275,6 +288,8 @@ const StudentSubject = () => {
         </div>
       )}
     </div>
+  </>
+
   );
 };
 

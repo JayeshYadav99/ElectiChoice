@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import SubjectNavbar from "../SubjectNavbar";
 
 const SubjectForm = () => {
   const [formData, setFormData] = useState({
@@ -53,7 +54,9 @@ const SubjectForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
+    <>
+    <SubjectNavbar/>
+        <div className="flex justify-center items-center h-screen bg-gray-900">
       <div className="bg-gray-800 text-white rounded-lg shadow-lg p-8">
         <h2 className="text-2xl font-semibold mb-4 w-96 text-white">
           Subject Form
@@ -131,7 +134,8 @@ const SubjectForm = () => {
           </button>
         </form>
       </div>
-    </div>
+    </div></>
+
   );
 };
 

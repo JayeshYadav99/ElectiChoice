@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import SubjectNavbar from '../SubjectNavbar';
 
 const StudentsForSubject = () => {
   const { id } = useParams();
@@ -12,8 +13,14 @@ const StudentsForSubject = () => {
 
   useEffect(() => {
     fetchStudentsForSubject(subjectCode);
-    fetchAllStudents();
+    // fetchAllStudents();
   }, [subjectCode]);
+  useEffect(() => {
+    fetchAllStudents();
+    // fetchAllStudents();
+  }, [studentsForSubject]);
+
+
 
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
@@ -29,11 +36,13 @@ const StudentsForSubject = () => {
 
   const fetchAllStudents = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:4000/student/allstudents"
-      );
-      const allStudents = response.data;
-
+      const response = await axios.get('http://localhost:4000/student/allstudents');
+      console.log(studentsForSubject);
+      const allStudents = response.data.filter((student) => {
+        return !studentsForSubject.some((assignedStudent) => assignedStudent._id === student._id);
+      });
+  console.log(allStudents);
+      
       setAllStudents(allStudents);
     } catch (error) {
       console.error(error);
@@ -56,6 +65,7 @@ const StudentsForSubject = () => {
       // Clear the selected student and refetch the students for the subject
       setSelectedStudent(null);
       fetchStudentsForSubject(subjectCode);
+      fetchAllStudents();
     } catch (error) {
       console.error(error);
     }
@@ -91,9 +101,9 @@ const StudentsForSubject = () => {
   };
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">
-        Students for Subject {subjectCode}
-      </h1>
+          <SubjectNavbar/>
+        
+      <h1 className="text-2xl font-bold mb-4">Students for Subject {subjectCode}</h1>
 
       <h2 className="text-lg font-bold mb-2">Students for Subject:</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -117,8 +127,8 @@ const StudentsForSubject = () => {
           </div>
         ))}
       </div>
-
-      <h2 className="text-lg font-bold mb-2 mt-4">All Students:</h2>
+<div className='mb-8'>
+<h2 className="text-lg font-bold mb-2 mt-4">All Students:</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {allStudents.map((student) => (
           <div
@@ -135,6 +145,8 @@ const StudentsForSubject = () => {
           </div>
         ))}
       </div>
+</div>
+     
 
       {selectedStudent && (
         <div>
