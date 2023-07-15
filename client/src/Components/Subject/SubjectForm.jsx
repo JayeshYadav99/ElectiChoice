@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const SubjectForm = () => {
   const [formData, setFormData] = useState({
-    subjectName: '',
-    subjectCode: '',
-    subjectDescription: '',
+    subjectName: "",
+    subjectCode: "",
+    subjectDescription: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -20,13 +20,13 @@ const SubjectForm = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.subjectName.trim()) {
-      newErrors.subjectName = 'Subject Name is required';
+      newErrors.subjectName = "Subject Name is required";
     }
     if (!formData.subjectCode.trim()) {
-      newErrors.subjectCode = 'Subject Code is required';
+      newErrors.subjectCode = "Subject Code is required";
     }
     if (!formData.subjectDescription.trim()) {
-      newErrors.subjectDescription = 'Subject Description is required';
+      newErrors.subjectDescription = "Subject Description is required";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -36,13 +36,13 @@ const SubjectForm = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post('http://localhost:4000/subject/addsubject', formData)
+        .post("http://localhost:4000/subject/addsubject", formData)
         .then((response) => {
           console.log(response.data);
           setFormData({
-            subjectName: '',
-            subjectCode: '',
-            subjectDescription: '',
+            subjectName: "",
+            subjectCode: "",
+            subjectDescription: "",
           });
           setErrors({});
         })
@@ -53,12 +53,17 @@ const SubjectForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-semibold mb-4 w-96">Subject Form</h2>
+    <div className="flex justify-center items-center h-screen bg-gray-900">
+      <div className="bg-gray-800 text-white rounded-lg shadow-lg p-8">
+        <h2 className="text-2xl font-semibold mb-4 w-96 text-white">
+          Subject Form
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="subjectName" className="block mb-1 font-medium">
+            <label
+              htmlFor="subjectName"
+              className="block mb-1 font-medium text-white"
+            >
               Subject Name
             </label>
             <input
@@ -68,15 +73,18 @@ const SubjectForm = () => {
               value={formData.subjectName}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.subjectName ? 'border-red-500' : 'border-gray-300'
-              } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                errors.subjectName ? "border-red-500" : "border-gray-300"
+              } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
             />
             {errors.subjectName && (
               <p className="text-red-500 text-sm mt-1">{errors.subjectName}</p>
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="subjectCode" className="block mb-1 font-medium">
+            <label
+              htmlFor="subjectCode"
+              className="block mb-1 font-medium text-white"
+            >
               Subject Code
             </label>
             <input
@@ -86,15 +94,18 @@ const SubjectForm = () => {
               value={formData.subjectCode}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.subjectCode ? 'border-red-500' : 'border-gray-300'
-              } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                errors.subjectCode ? "border-red-500" : "border-gray-300"
+              } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
             />
             {errors.subjectCode && (
               <p className="text-red-500 text-sm mt-1">{errors.subjectCode}</p>
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="subjectDescription" className="block mb-1 font-medium">
+            <label
+              htmlFor="subjectDescription"
+              className="block mb-1 font-medium text-white"
+            >
               Subject Description
             </label>
             <textarea
@@ -103,11 +114,13 @@ const SubjectForm = () => {
               value={formData.subjectDescription}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.subjectDescription ? 'border-red-500' : 'border-gray-300'
-              } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                errors.subjectDescription ? "border-red-500" : "border-gray-300"
+              } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
             />
             {errors.subjectDescription && (
-              <p className="text-red-500 text-sm mt-1">{errors.subjectDescription}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.subjectDescription}
+              </p>
             )}
           </div>
           <button
