@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -42,11 +45,11 @@ const StudentList = () => {
         `http://localhost:4000/student/DeleteStudent/${selectedStudent.idNumber}`,
         { withCredentials: true }
       );
-      // Display a success message or update the student list
+      toast.success("Student deleted successfully!");
       fetchStudents();
     } catch (error) {
       console.error(error);
-      // Display an error message
+      toast.error("Failed to delete student.");
     }
     setShowModal(false);
   };

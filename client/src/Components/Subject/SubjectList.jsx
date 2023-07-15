@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ElectiveSubjectPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,11 +45,11 @@ const ElectiveSubjectPage = () => {
         `http://localhost:4000/subject/deleteSubject/${selectedSubject.subjectCode}`,
         { withCredentials: true }
       );
-      // Display a success message or update the subject list
+      toast.success("Subject deleted successfully!");
       fetchSubjects();
     } catch (error) {
       console.error(error);
-      // Display an error message
+      toast.error("Failed to delete subject.");
     }
     setShowModal(false);
   };

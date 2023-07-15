@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SubjectNavbar from "../SubjectNavbar";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SubjectForm = () => {
   const [formData, setFormData] = useState({
@@ -48,6 +50,7 @@ const SubjectForm = () => {
             subjectDescription: "",
           });
           setErrors({});
+          toast.success("Subject added successfully!");
         })
         .catch((error) => {
           console.error(error);

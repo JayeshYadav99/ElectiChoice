@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import StudentNavbar from "../StudentNavbar";
 const EditStudent = () => {
   const { id } = useParams();
@@ -40,20 +42,17 @@ const EditStudent = () => {
 
   const handleSave = async () => {
     try {
-      console.log(studentData);
-
       await axios.put(
         `http://localhost:4000/student/UpdateStudent/${studentId}`,
         studentData,
         { withCredentials: true }
       );
-      // Display a success message or redirect to the student list
+      toast.success("Student data updated successfully!");
     } catch (error) {
       console.error(error);
-      // Display an error message
+      toast.error("Failed to update student data.");
     }
   };
-
   return (
     <>
       <StudentNavbar />
