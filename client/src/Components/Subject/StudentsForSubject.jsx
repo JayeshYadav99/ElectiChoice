@@ -23,7 +23,8 @@ const StudentsForSubject = () => {
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`,{withCredentials: true},
+        `http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`,
+        { withCredentials: true }
       );
       const students = response.data.map((item) => item.student);
       setStudentsForSubject(students);
@@ -34,7 +35,10 @@ const StudentsForSubject = () => {
 
   const fetchAllStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/student/allstudents',{withCredentials: true},);
+      const response = await axios.get(
+        "http://localhost:4000/student/allstudents",
+        { withCredentials: true }
+      );
       console.log(studentsForSubject);
       const allStudents = response.data.filter((student) => {
         return !studentsForSubject.some(
@@ -60,7 +64,8 @@ const StudentsForSubject = () => {
         {
           studentId: selectedStudent._id,
           electiveSubjectId: subjectCode,
-        },{withCredentials: true}
+        },
+        { withCredentials: true }
       );
       // Clear the selected student and refetch the students for the subject
       setSelectedStudent(null);
@@ -85,8 +90,8 @@ const StudentsForSubject = () => {
             studentId: selectedStudent._id,
             electiveSubjectId: subjectCode,
           },
-          withCredentials: true, // Include cookies in the request
-        }
+        },
+        { withCredentials: true }
       );
       
       // Remove the student from the state
@@ -138,7 +143,7 @@ const StudentsForSubject = () => {
             <div
               key={student._id}
               className={`border border-gray-300 p-4 rounded cursor-pointer ${
-                selectedStudent?._id === student._id ? "bg-blue-100" : ""
+                selectedStudent?._id === student._id ? "bg-gray-800" : ""
               }`}
               onClick={() => handleCardClick(student)}
             >

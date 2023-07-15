@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import SubjectNavbar from "../SubjectNavbar";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditSubject = () => {
   const { id } = useParams();
@@ -20,7 +22,8 @@ const EditSubject = () => {
   const fetchSubjectData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/subject/getsubject/${subjectId}`,{withCredentials: true},
+        `http://localhost:4000/subject/getsubject/${subjectId}`,
+        { withCredentials: true }
       );
       console.log(response.data);
       setSubjectData(response.data);
@@ -41,12 +44,13 @@ const EditSubject = () => {
     try {
       await axios.put(
         `http://localhost:4000/subject/updateSubject/${subjectId}`,
-        subjectData,{withCredentials: true},
+        subjectData,
+        { withCredentials: true }
       );
-      // Display a success message or redirect to the subject list
+      toast.success("Subject updated successfully!");
     } catch (error) {
       console.error(error);
-      // Display an error message
+      toast.error("Failed to update subject.");
     }
   };
 

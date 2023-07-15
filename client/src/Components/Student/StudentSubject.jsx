@@ -28,7 +28,8 @@ const StudentSubject = () => {
   const fetchStudent = async (studentId) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/student/getstudent/${studentId}`,{withCredentials: true},
+        `http://localhost:4000/student/getstudent/${studentId}`,
+        { withCredentials: true }
       );
       console.log(response.data[0]);
       setStudent(response.data[0]);
@@ -63,7 +64,7 @@ const StudentSubject = () => {
   const fetchAssignedSubjects = async (studentId) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`,
+        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`
       );
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);
@@ -84,7 +85,7 @@ const StudentSubject = () => {
           studentId: student._id,
           electiveSubjectId: selectedSubject,
         },
-        {withCredentials: true},
+        { withCredentials: true }
       );
       console.log(response.data);
       fetchAssignedSubjects(id);
@@ -113,7 +114,8 @@ const StudentSubject = () => {
             studentId: student._id,
             electiveSubjectId: selectedSubject._id,
           },
-        },{withCredentials: true}
+        },
+        { withCredentials: true }
       );
       fetchAssignedSubjects(student._id);
     } catch (error) {
@@ -190,7 +192,7 @@ const StudentSubject = () => {
                 <h2 className="text-lg font-medium text-black dark:">
                   {subject.subjectName}
                 </h2>
-                <p className="tracking-tighter text-black md:text-lg text-black">
+                <p className="tracking-tighter  md:text-lg text-black">
                   {subject.subjectCode}
                 </p>
                 <p className="mb-3  text-black">{subject.subjectDescription}</p>
