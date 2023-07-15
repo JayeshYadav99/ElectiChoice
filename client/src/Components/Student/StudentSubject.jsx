@@ -43,7 +43,7 @@ const StudentSubject = () => {
     try {
       console.log("called---------------------------->");
       const response = await axios.get(
-        `http://localhost:4000/subject/allsubjects`
+        `http://localhost:4000/subject/allsubjects`, { withCredentials: true }
       );
       const allSubjects = response.data;
       console.log(assignedSubjects);
@@ -64,7 +64,7 @@ const StudentSubject = () => {
   const fetchAssignedSubjects = async (studentId) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`
+        `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`,{ withCredentials: true }
       );
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);

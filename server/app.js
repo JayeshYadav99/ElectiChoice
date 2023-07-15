@@ -23,6 +23,7 @@ mongoose
 app.use(
   cors({
     origin: "http://localhost:5173",
+   
     credentials: true,
   })
 );
@@ -37,7 +38,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/auth", authRoute);
-app.use("/main",authMiddleware,StudentElectiveSubjectRoute);
+app.use("/main",authMiddleware(["admin","user","student"]),StudentElectiveSubjectRoute);
 app.use("/student" ,authMiddleware(["admin","user"]), StudentRoute);
 app.use("/subject",authMiddleware(["admin","user"]),SubjectRoute);
 app.get("/yaae", authMiddleware(["admin","user"]), (req, res) => {
