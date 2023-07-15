@@ -12,6 +12,9 @@ const Signup = () => {
     username: "",
   });
   const { email, password, username } = inputValue;
+
+  const [role, setRole] = useState("student");
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setInputValue({
@@ -27,6 +30,7 @@ const Signup = () => {
         "http://localhost:4000/auth/signup",
         {
           ...inputValue,
+          role: role,
         },
         { withCredentials: true }
       );
@@ -60,7 +64,7 @@ const Signup = () => {
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-900">
-      <div className="max-w-md w-full px-6 py-8  border-2 border-gray-300 shadow-lg rounded-md bg-gray-800">
+      <div className="max-w-md w-full px-6 py-8 border-2 border-gray-300 shadow-lg rounded-md bg-gray-800">
         <h2 className="text-2xl font-bold mb-4 text-white">Signup Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -104,6 +108,20 @@ const Signup = () => {
               onChange={handleOnChange}
               className="w-full p-2 border rounded text-black"
             />
+          </div>
+          <div>
+            <label htmlFor="role" className="text-lg font-medium text-white">
+              Role
+            </label>
+            <select
+              name="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="w-full p-2 border rounded text-black"
+            >
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
           <button
             type="submit"

@@ -9,6 +9,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
+  const[user,Setuser]=useState();
   const token = cookies.get("TOKEN");
   useEffect(() => {
     const verifyCookie = async () => {
@@ -32,6 +33,7 @@ const Home = () => {
           if (status && user) {
             // alert(user.username);
             console.log(user.username);
+            Setuser(user);
             setUsername(user.username);
           } else {
             console.log("2");
@@ -70,12 +72,33 @@ const Home = () => {
   };
 
   return (
-    <div className="home_page">
-      <h4>
-        Welcome <span>{username}</span>
-      </h4>
-      <button onClick={handleLogout}>LOGOUT</button>
+    <div className="flex justify-center items-center h-screen bg-red-100">
+    {user && <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-4">Welcome, {user.username}</h2>
+      {user.role === 'admin' ? (
+        <div>
+          <h3 className="text-xl font-semibold mb-2">Admin Perks:</h3>
+          <ul className="list-disc list-inside">
+            <li className="text-blue-500">Access to all website routes</li>
+            <li className="text-green-500">Manage student details</li>
+            <li className="text-yellow-500">Manage elective subjects</li>
+            <li className="text-purple-500">Assign subjects to students</li>
+          </ul>
+        </div>
+      ) : (
+        <div>
+          <h3 className="text-xl font-semibold mb-2">Student Perks:</h3>
+          <ul className="list-disc list-inside">
+            <li className="text-blue-500">Choose elective subjects</li>
+            <li className="text-green-500">Access limited routes</li>
+            <li className="text-yellow-500">View selected subjects</li>
+          </ul>
+        </div>
+      )}
     </div>
+}
+  </div>
+
   );
 };
 

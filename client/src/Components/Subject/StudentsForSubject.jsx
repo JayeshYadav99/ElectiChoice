@@ -85,9 +85,10 @@ const StudentsForSubject = () => {
             studentId: selectedStudent._id,
             electiveSubjectId: subjectCode,
           },
+          withCredentials: true, // Include cookies in the request
         }
-        ,{withCredentials: true},
       );
+      
       // Remove the student from the state
       fetchStudentsForSubject(subjectCode);
     } catch (error) {

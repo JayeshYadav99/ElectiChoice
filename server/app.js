@@ -37,10 +37,10 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/auth", authRoute);
-app.use("/main",StudentElectiveSubjectRoute);
-app.use("/student" ,authMiddleware, StudentRoute);
-app.use("/subject",SubjectRoute);
-app.get("/yaae", authMiddleware, (req, res) => {
+app.use("/main",authMiddleware,StudentElectiveSubjectRoute);
+app.use("/student" ,authMiddleware(["admin","user"]), StudentRoute);
+app.use("/subject",authMiddleware(["admin","user"]),SubjectRoute);
+app.get("/yaae", authMiddleware(["admin","user"]), (req, res) => {
   // console.log(req.user);
   res.json({ status: true, user: req.user });
 });

@@ -1,16 +1,30 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+import axios from 'axios'
+
 export default function Navbar() {
   const cookies = new Cookies();
   const token = cookies.get("TOKEN");
-  const [show, Setshow] = useState(false);
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
-    if (token) {
-    } else {
-    }
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/yaae", {
+          withCredentials: true,
+        });
+
+        const { status, user } = response.data;
+        if ( user) {
+          setUsername(user.username);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUser();
   }, []);
 
   return (
@@ -65,32 +79,33 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Contact
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/Login"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Login
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/Signup"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Signup
-                </a>
-              </li>
+              {token && username ? (
+                <li>
+                  <span className="block py-2 pl-3 pr-4 text-gray-900 rounded bg-gray-200">
+                    Welcome, {username}
+                  </span>
+                </li>
+              ) : null}
+              {!token && (
+                <>
+                  <li>
+                    <a
+                      href="/Login"
+                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      Login
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/Signup"
+                      className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    >
+                      Signup
+                    </a>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
