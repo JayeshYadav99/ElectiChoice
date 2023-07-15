@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-
-const ElectiveSubjectPage = () => {
-  const [subjects, setSubjects] = useState([]);
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+const StudentList = () => {
+  const [students, setStudents] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedSubject, setSelectedSubject] = useState(null);
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
   useEffect(() => {
-    fetchSubjects();
+    fetchStudents();
   }, []);
 
-  const fetchSubjects = async () => {
+  const fetchStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/subject/allsubjects');
-      setSubjects(response.data);
+      const response = await axios.get(
+        "http://localhost:4000/student/allstudents"
+      );
+      console.log(response.data[0]);
+      setStudents(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleDelete = (subject) => {
-    setSelectedSubject(subject);
+  const handleDelete = (student) => {
+    setSelectedStudent(student);
     setShowModal(true);
   };
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/subject/deletesubject/${selectedSubject.subjectCode}`);
-      // Display a success message or update the subject list
-      fetchSubjects();
+      await axios.delete(
+        `http://localhost:4000/student/DeleteStudent/${selectedStudent.idNumber}`
+      );
+      // Display a success message or update the student list
+      fetchStudents();
     } catch (error) {
       console.error(error);
       // Display an error message
@@ -38,29 +42,45 @@ const ElectiveSubjectPage = () => {
   };
 
   const cancelDelete = () => {
-    setSelectedSubject(null);
+    setSelectedStudent(null);
     setShowModal(false);
   };
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Elective Subjects</h1>
+    <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">Student List</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {subjects.map((subject) => (
-          <div key={subject.subjectCode} className="border border-gray-300 p-4 rounded">
-            <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
-            <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
-            <p>{subject.subjectDescription}</p>
+        {students.map((student) => (
+          <div
+            key={student.id}
+            className="bg-white shadow rounded border border-gray-300 p-4 flex flex-col justify-between"
+          >
+            <div>
+              <h3 className="text-lg font-medium">{student.name}</h3>
+              <p className="text-gray-500">ID: {student.idNumber}</p>
+              <p className="text-gray-500">Email: {student.email}</p>
+              <p className="text-gray-500">Phone: {student.phoneNumber}</p>
+            </div>
             <div className="mt-4">
+              {/* Add buttons for editing and deleting a student */}
               <Link
-                to={`/editsubject/${subject.subjectCode}`}
+                to={{
+                  pathname: `/edit/${student.idNumber}`,
+                  state: { studentData: student, id: student.idNumber },
+                }} // Assuming the route for EditStudent component is '/edit/:id'
                 className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
               >
                 Edit
               </Link>
+              <Link
+                to={`/add-subject-to-student/${student.idNumber}`}
+                className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+              >
+                Add Subject
+              </Link>
               <button
-                className="bg-red-500 text-white px-4 py-2 rounded"
-                onClick={() => handleDelete(subject)}
+                onClick={() => handleDelete(student)}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
               >
                 Delete
               </button>
@@ -70,24 +90,64 @@ const ElectiveSubjectPage = () => {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white max-w-md p-6 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-            <p className="mb-4">
-              Are you sure you want to delete the subject <strong>{selectedSubject.subjectName}</strong>?
-            </p>
-            <div className="flex justify-end">
-              <button
-                className="bg-red-500 text-white px-4 py-2 rounded mr-2"
-                onClick={confirmDelete}
+        <div
+          id="popup-modal"
+          tabIndex="-1"
+          className="fixed top-0 left-0 right-0 z-50 p-4 flex items-center justify-center bg-black bg-opacity-50"
+        >
+          <div className="relative bg-white rounded-lg shadow max-w-md">
+            <button
+              type="button"
+              className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 flex items-center justify-center"
+              onClick={cancelDelete}
+            >
+              <svg
+                className="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
               >
-                Confirm
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
+            <div className="p-6 text-center">
+              <svg
+                className="mx-auto mb-4 text-gray-400 w-12 h-12"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 11V6m0 0 6-6M10 11h4m-4 0H6"
+                />
+              </svg>
+              <h3 className="mb-5 text-lg font-normal text-gray-500">
+                Are you sure you want to delete this student?
+              </h3>
+              <button
+                onClick={confirmDelete}
+                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+              >
+                Yes, I'm sure
               </button>
               <button
-                className="bg-gray-300 text-gray-800 px-4 py-2 rounded"
                 onClick={cancelDelete}
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
               >
-                Cancel
+                No, cancel
               </button>
             </div>
           </div>
@@ -97,4 +157,4 @@ const ElectiveSubjectPage = () => {
   );
 };
 
-export default ElectiveSubjectPage;
+export default StudentList;

@@ -19,6 +19,8 @@ import SubjectNavbar from "./Components/SubjectNavbar";
 import SubjectHome from "./Pages/SubjectHome";
 import EditSubject from "./Components/Subject/EditSubject";
 import SubjectForm from "./Components/Subject/SubjectForm";
+import StudentSubject from "./Components/Student/StudentSubject";
+import EditStudentSubject from "./Components/Student/EditStudentSubject";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -61,6 +63,9 @@ function App() {
         <Route path="/edit/:id" element={<EditStudent />}></Route>
         <Route path="/add-subject" element={<SubjectForm />}></Route>
         <Route path="/editsubject/:id" element={<EditSubject />}></Route>
+        <Route path="/edit-student-subject/:studentId/:electiveSubjectId" element={<EditStudentSubject />}></Route>
+        <Route path="/add-subject-to-student/:id" element={<StudentSubject/>}></Route>
+
       </Routes>
       <Footer />
     </>
