@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ElectiveSubjectPage = () => {
   const [subjects, setSubjects] = useState([]);
@@ -13,7 +13,9 @@ const ElectiveSubjectPage = () => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/subject/allsubjects');
+      const response = await axios.get(
+        "http://localhost:4000/subject/allsubjects"
+      );
       setSubjects(response.data);
     } catch (error) {
       console.error(error);
@@ -27,7 +29,9 @@ const ElectiveSubjectPage = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/subject/deleteSubject/${selectedSubject.subjectCode}`);
+      await axios.delete(
+        `http://localhost:4000/subject/deleteSubject/${selectedSubject.subjectCode}`
+      );
       // Display a success message or update the subject list
       fetchSubjects();
     } catch (error) {
@@ -47,7 +51,10 @@ const ElectiveSubjectPage = () => {
       <h1 className="text-2xl font-bold mb-4">Elective Subjects</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {subjects.map((subject) => (
-          <div key={subject.subjectCode} className="border border-gray-300 p-4 rounded">
+          <div
+            key={subject.subjectCode}
+            className="border border-gray-300 p-4 rounded"
+          >
             <h2 className="text-lg font-bold mb-2">{subject.subjectName}</h2>
             <p className="text-gray-500 mb-4">{subject.subjectCode}</p>
             <p>{subject.subjectDescription}</p>
@@ -57,12 +64,6 @@ const ElectiveSubjectPage = () => {
                 className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
               >
                 Edit
-              </Link>
-              <Link
-                to={`/add-student-to-subject/${subject._id}`}
-                className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-              >
-                Add Student
               </Link>
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded"

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 const StudentForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    idNumber: '',
-    email: '',
-    phoneNumber: '',
+    name: "",
+    idNumber: "",
+    email: "",
+    phoneNumber: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -21,16 +21,16 @@ const StudentForm = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = "Name is required";
     }
     if (!formData.idNumber.trim()) {
-      newErrors.idNumber = 'ID Number is required';
+      newErrors.idNumber = "ID Number is required";
     }
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     }
     if (!formData.phoneNumber.trim()) {
-      newErrors.phoneNumber = 'Phone Number is required';
+      newErrors.phoneNumber = "Phone Number is required";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -40,16 +40,17 @@ const StudentForm = () => {
     e.preventDefault();
     if (validateForm()) {
       // Make API call to backend to create/update student record
-      axios.post('http://localhost:4000/student/addstudent', formData)
+      axios
+        .post("http://localhost:4000/student/addstudent", formData)
         .then((response) => {
           // Handle success response
           console.log(response.data);
           // Reset form data
           setFormData({
-            name: '',
-            idNumber: '',
-            email: '',
-            phoneNumber: '',
+            name: "",
+            idNumber: "",
+            email: "",
+            phoneNumber: "",
           });
           // Clear errors
           setErrors({});
@@ -62,12 +63,14 @@ const StudentForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-semibold mb-4 w-96">Student Form</h2>
+    <div className="flex justify-center items-center h-screen bg-gray-900">
+      <div className="max-w-md w-full px-6 py-8  border-2 border-gray-300 shadow-lg rounded-md bg-gray-800">
+        <h2 className="text-2xl font-semibold mb-4 w-96 text-white">
+          Student Form
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="name" className="block mb-1 font-medium">
+            <label htmlFor="name" className="block mb-1 font-medium text-white">
               Name
             </label>
             <input
@@ -77,7 +80,7 @@ const StudentForm = () => {
               value={formData.name}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.name ? 'border-red-500' : 'border-gray-300'
+                errors.name ? "border-red-500" : "border-gray-300"
               } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {errors.name && (
@@ -85,7 +88,10 @@ const StudentForm = () => {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="idNumber" className="block mb-1 font-medium">
+            <label
+              htmlFor="idNumber"
+              className="block mb-1 font-medium text-white"
+            >
               ID Number
             </label>
             <input
@@ -95,7 +101,7 @@ const StudentForm = () => {
               value={formData.idNumber}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.idNumber ? 'border-red-500' : 'border-gray-300'
+                errors.idNumber ? "border-red-500" : "border-gray-300"
               } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {errors.idNumber && (
@@ -103,7 +109,10 @@ const StudentForm = () => {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block mb-1 font-medium">
+            <label
+              htmlFor="email"
+              className="block mb-1 font-medium text-white"
+            >
               Email
             </label>
             <input
@@ -113,7 +122,7 @@ const StudentForm = () => {
               value={formData.email}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
+                errors.email ? "border-red-500" : "border-gray-300"
               } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {errors.email && (
@@ -121,7 +130,10 @@ const StudentForm = () => {
             )}
           </div>
           <div className="mb-4">
-            <label htmlFor="phoneNumber" className="block mb-1 font-medium">
+            <label
+              htmlFor="phoneNumber"
+              className="block mb-1 font-medium text-white"
+            >
               Phone Number
             </label>
             <input
@@ -131,7 +143,7 @@ const StudentForm = () => {
               value={formData.phoneNumber}
               onChange={handleInputChange}
               className={`w-full border ${
-                errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                errors.phoneNumber ? "border-red-500" : "border-gray-300"
               } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500`}
             />
             {errors.phoneNumber && (

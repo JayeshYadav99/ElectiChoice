@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const StudentsForSubject = () => {
   const { id } = useParams();
@@ -17,7 +17,9 @@ const StudentsForSubject = () => {
 
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
-      const response = await axios.get(`http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`);
+      const response = await axios.get(
+        `http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`
+      );
       const students = response.data.map((item) => item.student);
       setStudentsForSubject(students);
     } catch (error) {
@@ -27,9 +29,11 @@ const StudentsForSubject = () => {
 
   const fetchAllStudents = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/student/allstudents');
+      const response = await axios.get(
+        "http://localhost:4000/student/allstudents"
+      );
       const allStudents = response.data;
-      
+
       setAllStudents(allStudents);
     } catch (error) {
       console.error(error);
@@ -42,10 +46,13 @@ const StudentsForSubject = () => {
 
   const assignStudentToSubject = async () => {
     try {
-      await axios.post('http://localhost:4000/main/addStudentToElectiveSubject', {
-        studentId: selectedStudent._id,
-        electiveSubjectId: subjectCode,
-      });
+      await axios.post(
+        "http://localhost:4000/main/addStudentToElectiveSubject",
+        {
+          studentId: selectedStudent._id,
+          electiveSubjectId: subjectCode,
+        }
+      );
       // Clear the selected student and refetch the students for the subject
       setSelectedStudent(null);
       fetchStudentsForSubject(subjectCode);
@@ -61,12 +68,15 @@ const StudentsForSubject = () => {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:4000/main/removeElectiveSubjectFromStudent`, {
-        data: {
-          studentId: selectedStudent._id,
-          electiveSubjectId: subjectCode,
-        },
-      });
+      await axios.delete(
+        `http://localhost:4000/main/removeElectiveSubjectFromStudent`,
+        {
+          data: {
+            studentId: selectedStudent._id,
+            electiveSubjectId: subjectCode,
+          },
+        }
+      );
       // Remove the student from the state
       fetchStudentsForSubject(subjectCode);
     } catch (error) {
@@ -78,10 +88,12 @@ const StudentsForSubject = () => {
   const cancelDelete = () => {
     setSelectedStudent(null);
     setShowModal(false);
-  }
+  };
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Students for Subject {subjectCode}</h1>
+      <h1 className="text-2xl font-bold mb-4">
+        Students for Subject {subjectCode}
+      </h1>
 
       <h2 className="text-lg font-bold mb-2">Students for Subject:</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -112,7 +124,7 @@ const StudentsForSubject = () => {
           <div
             key={student._id}
             className={`border border-gray-300 p-4 rounded cursor-pointer ${
-              selectedStudent?._id === student._id ? 'bg-blue-100' : ''
+              selectedStudent?._id === student._id ? "bg-blue-100" : ""
             }`}
             onClick={() => handleCardClick(student)}
           >
@@ -131,7 +143,9 @@ const StudentsForSubject = () => {
             <h2 className="text-lg font-bold mb-2">{selectedStudent.name}</h2>
             <p className="text-gray-500">ID: {selectedStudent.idNumber}</p>
             <p className="text-gray-500">Email: {selectedStudent.email}</p>
-            <p className="text-gray-500">Phone: {selectedStudent.phoneNumber}</p>
+            <p className="text-gray-500">
+              Phone: {selectedStudent.phoneNumber}
+            </p>
           </div>
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
@@ -141,7 +155,7 @@ const StudentsForSubject = () => {
           </button>
         </div>
       )}
-        {showModal && (
+      {showModal && (
         <div
           id="popup-modal"
           tabIndex="-1"
