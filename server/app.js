@@ -22,7 +22,8 @@ mongoose
 
 app.use(
   cors({
-    origin: ["https://electivesubject.netlify.app/","https://elective-subject-selector-six.vercel.app/"],
+    origin: ["https://electivesubject.netlify.app/","https://elective-subject-selector-six.vercel.app/","http://localhost:5173"],
+
    
     credentials: true,
   })
