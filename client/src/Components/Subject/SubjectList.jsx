@@ -25,7 +25,7 @@ const ElectiveSubjectPage = () => {
   const fetchSubjects = async () => {
     try {
       const response = await axios.get(
-        "https://elective-subject-selector.onrender.com/subject/allsubjects",
+        "https://elective-subject-selector-backend.onrender.com/subject/allsubjects",
         { withCredentials: true }
       );
       setSubjects(response.data);
@@ -42,7 +42,7 @@ const ElectiveSubjectPage = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `https://elective-subject-selector.onrender.com/subject/deleteSubject/${selectedSubject.subjectCode}`,
+        `https://elective-subject-selector-backend.onrender.com/subject/deleteSubject/${selectedSubject.subjectCode}`,
         { withCredentials: true }
       );
       toast.success("Subject deleted successfully!");

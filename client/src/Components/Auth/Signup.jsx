@@ -27,7 +27,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://elective-subject-selector.onrender.com/auth/signup",
+        "https://elective-subject-selector-backend.onrender.com/auth/signup",
         {
           ...inputValue,
           role: role,

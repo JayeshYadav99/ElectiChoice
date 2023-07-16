@@ -22,7 +22,7 @@ const EditSubject = () => {
     const fetchSubjectData = async () => {
         try {
             const response = await axios.get(
-                `https://elective-subject-selector.onrender.com/subject/getsubject/${subjectId}`,
+                `https://elective-subject-selector-backend.onrender.com/subject/getsubject/${subjectId}`,
                 { withCredentials: true }
             );
             console.log(response.data);
@@ -43,7 +43,7 @@ const EditSubject = () => {
     const handleSave = async () => {
         try {
             await axios.put(
-                `https://elective-subject-selector.onrender.com/subject/updateSubject/${subjectId}`,
+                `https://elective-subject-selector-backend.onrender.com/subject/updateSubject/${subjectId}`,
                 subjectData,
                 { withCredentials: true }
             );

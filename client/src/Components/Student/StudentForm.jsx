@@ -44,7 +44,7 @@ const StudentForm = () => {
     if (validateForm()) {
       // Make API call to backend to create/update student record
       axios
-        .post("https://elective-subject-selector.onrender.com/student/addstudent", formData, {
+        .post("https://elective-subject-selector-backend.onrender.com/student/addstudent", formData, {
           withCredentials: true,
         })
         .then((response) => {

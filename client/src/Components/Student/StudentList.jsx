@@ -24,7 +24,7 @@ const StudentList = () => {
   const fetchStudents = async () => {
     try {
       const response = await axios.get(
-        "https://elective-subject-selector.onrender.com/student/allstudents",
+        "https://elective-subject-selector-backend.onrender.com/student/allstudents",
         { withCredentials: true }
       );
       console.log(response.data[0]);
@@ -42,7 +42,7 @@ const StudentList = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `https://elective-subject-selector.onrender.com/student/DeleteStudent/${selectedStudent.idNumber}`,
+        `https://elective-subject-selector-backend.onrender.com/student/DeleteStudent/${selectedStudent.idNumber}`,
         { withCredentials: true }
       );
       toast.success("Student deleted successfully!");

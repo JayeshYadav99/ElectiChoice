@@ -28,7 +28,7 @@ const StudentSubject = () => {
   const fetchStudent = async (studentId) => {
     try {
       const response = await axios.get(
-        `https://elective-subject-selector.onrender.com/student/getstudent/${studentId}`,
+        `https://elective-subject-selector-backend.onrender.com/student/getstudent/${studentId}`,
         { withCredentials: true }
       );
       console.log(response.data[0]);
@@ -43,7 +43,7 @@ const StudentSubject = () => {
     try {
       console.log("called---------------------------->");
       const response = await axios.get(
-        `https://elective-subject-selector.onrender.com/subject/allsubjects`, { withCredentials: true }
+        `https://elective-subject-selector-backend.onrender.com/subject/allsubjects`, { withCredentials: true }
       );
       const allSubjects = response.data;
       console.log(assignedSubjects);
@@ -64,7 +64,7 @@ const StudentSubject = () => {
   const fetchAssignedSubjects = async (studentId) => {
     try {
       const response = await axios.get(
-        `https://elective-subject-selector.onrender.com/main/getElectiveSubjectsForStudent/${studentId}`, { withCredentials: true }
+        `https://elective-subject-selector-backend.onrender.com/main/getElectiveSubjectsForStudent/${studentId}`, { withCredentials: true }
       );
       const subjects = response.data.map((item) => item.electiveSubject);
       console.log(subjects);
@@ -80,7 +80,7 @@ const StudentSubject = () => {
     try {
       console.log(selectedSubject);
       const response = await axios.post(
-        `https://elective-subject-selector.onrender.com/main/addElectiveSubjectToStudent`,
+        `https://elective-subject-selector-backend.onrender.com/main/addElectiveSubjectToStudent`,
         {
           studentId: student._id,
           electiveSubjectId: selectedSubject,
@@ -108,7 +108,7 @@ const StudentSubject = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `https://elective-subject-selector.onrender.com/main/removeElectiveSubjectFromStudent`,
+        `https://elective-subject-selector-backend.onrender.com/main/removeElectiveSubjectFromStudent`,
         {
           data: {
             studentId: student._id,

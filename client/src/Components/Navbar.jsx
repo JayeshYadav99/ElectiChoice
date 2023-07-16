@@ -11,7 +11,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("https://elective-subject-selector.onrender.com/yaae", {
+        const response = await axios.get("https://elective-subject-selector-backend.onrender.com/yaae", {
           withCredentials: true,
         });
 

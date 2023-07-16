@@ -23,7 +23,7 @@ const StudentsForSubject = () => {
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
       const response = await axios.get(
-        `https://elective-subject-selector.onrender.com/main/getStudentsForElectiveSubject/${subjectCode}`,
+        `https://elective-subject-selector-backend.onrender.com/main/getStudentsForElectiveSubject/${subjectCode}`,
         { withCredentials: true }
       );
       const students = response.data.map((item) => item.student);
@@ -36,7 +36,7 @@ const StudentsForSubject = () => {
   const fetchAllStudents = async () => {
     try {
       const response = await axios.get(
-        "https://elective-subject-selector.onrender.com/student/allstudents",
+        "https://elective-subject-selector-backend.onrender.com/student/allstudents",
         { withCredentials: true }
       );
       console.log(studentsForSubject);
@@ -60,7 +60,7 @@ const StudentsForSubject = () => {
   const assignStudentToSubject = async () => {
     try {
       await axios.post(
-        "https://elective-subject-selector.onrender.com/main/addStudentToElectiveSubject",
+        "https://elective-subject-selector-backend.onrender.com/main/addStudentToElectiveSubject",
         {
           studentId: selectedStudent._id,
           electiveSubjectId: subjectCode,
@@ -84,7 +84,7 @@ const StudentsForSubject = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `https://elective-subject-selector.onrender.com/main/removeElectiveSubjectFromStudent`,
+        `https://elective-subject-selector-backend.onrender.com/main/removeElectiveSubjectFromStudent`,
         {
           data: {
             studentId: selectedStudent._id,

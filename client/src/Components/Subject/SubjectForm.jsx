@@ -39,7 +39,7 @@ const SubjectForm = () => {
         e.preventDefault();
         if (validateForm()) {
             axios
-                .post("https://elective-subject-selector.onrender.com/subject/addsubject", formData, {
+                .post("https://elective-subject-selector-backend.onrender.com/subject/addsubject", formData, {
                     withCredentials: true,
                 })
                 .then((response) => {
@@ -124,8 +124,8 @@ const SubjectForm = () => {
                                 value={formData.subjectDescription}
                                 onChange={handleInputChange}
                                 className={`w-full border ${errors.subjectDescription
-                                        ? "border-red-500"
-                                        : "border-gray-300"
+                                    ? "border-red-500"
+                                    : "border-gray-300"
                                     } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
                             />
                             {errors.subjectDescription && (
