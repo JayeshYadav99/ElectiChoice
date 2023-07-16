@@ -23,7 +23,7 @@ const StudentsForSubject = () => {
   const fetchStudentsForSubject = async (subjectCode) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/main/getStudentsForElectiveSubject/${subjectCode}`,
+        `https://elective-subject-selector.onrender.com/main/getStudentsForElectiveSubject/${subjectCode}`,
         { withCredentials: true }
       );
       const students = response.data.map((item) => item.student);
@@ -36,7 +36,7 @@ const StudentsForSubject = () => {
   const fetchAllStudents = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/student/allstudents",
+        "https://elective-subject-selector.onrender.com/student/allstudents",
         { withCredentials: true }
       );
       console.log(studentsForSubject);
@@ -60,7 +60,7 @@ const StudentsForSubject = () => {
   const assignStudentToSubject = async () => {
     try {
       await axios.post(
-        "http://localhost:4000/main/addStudentToElectiveSubject",
+        "https://elective-subject-selector.onrender.com/main/addStudentToElectiveSubject",
         {
           studentId: selectedStudent._id,
           electiveSubjectId: subjectCode,
@@ -84,7 +84,7 @@ const StudentsForSubject = () => {
   const confirmDelete = async () => {
     try {
       await axios.delete(
-        `http://localhost:4000/main/removeElectiveSubjectFromStudent`,
+        `https://elective-subject-selector.onrender.com/main/removeElectiveSubjectFromStudent`,
         {
           data: {
             studentId: selectedStudent._id,
@@ -93,7 +93,7 @@ const StudentsForSubject = () => {
         },
         { withCredentials: true }
       );
-      
+
       // Remove the student from the state
       fetchStudentsForSubject(subjectCode);
     } catch (error) {
@@ -142,9 +142,8 @@ const StudentsForSubject = () => {
           {allStudents.map((student) => (
             <div
               key={student._id}
-              className={`border border-gray-300 p-4 rounded cursor-pointer ${
-                selectedStudent?._id === student._id ? "bg-gray-800" : ""
-              }`}
+              className={`border border-gray-300 p-4 rounded cursor-pointer ${selectedStudent?._id === student._id ? "bg-gray-800" : ""
+                }`}
               onClick={() => handleCardClick(student)}
             >
               <h2 className="text-lg font-bold mb-2">{student.name}</h2>

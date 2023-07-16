@@ -22,7 +22,7 @@ const EditStudent = () => {
   const fetchStudentData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/student/getstudent/${studentId}`,
+        `https://elective-subject-selector.onrender.com/student/getstudent/${studentId}`,
         { withCredentials: true }
       );
       console.log(response.data[0].name);
@@ -43,7 +43,7 @@ const EditStudent = () => {
   const handleSave = async () => {
     try {
       await axios.put(
-        `http://localhost:4000/student/UpdateStudent/${studentId}`,
+        `https://elective-subject-selector.onrender.com/student/UpdateStudent/${studentId}`,
         studentData,
         { withCredentials: true }
       );
