@@ -1,8 +1,8 @@
-const ElectiveSubject = require('../Models/ElectiveSubjectModel');
 
-const StudentElectiveSubject =require('../Models/StudentElectiveSubjectModel')
 
-const Student = require("../Models/StudentModel");
+const StudentElectiveSubject =require('../Models/StudentElectiveSubjectModel');
+
+const{ Student,ElectiveSubject} = require("../Models/StudentModel");
 
 exports.addElectiveSubjectToStudent = async (req, res) => {
     try {
