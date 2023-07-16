@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/auth/login",
+        "https://elective-subject-selector.onrender.com/auth/login",
         {
           ...inputValue,
         },
