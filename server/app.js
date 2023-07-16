@@ -22,7 +22,7 @@ mongoose
 
 app.use(
   cors({
-    origin: "https://electivesubject.netlify.app",
+    origin: ["https://electivesubject.netlify.app/","https://elective-subject-selector-six.vercel.app/"],
    
     credentials: true,
   })
