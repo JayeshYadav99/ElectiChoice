@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
@@ -67,7 +67,7 @@ const Home = () => {
         navigate('/login');
       } else {
         try {
-          const response = await axios.get('https://elective-subject-selector.onrender.com/yaae', {
+          const response = await axios.get('http://localhost:4000/yaae', {
             withCredentials: true,
             headers: {
               Authorization: `Bearer ${token}`,
@@ -157,12 +157,12 @@ const Home = () => {
               </ul>
             </div>
           )}
-          <li className="text-blue-500">
-            <Link to="/student">Student Home Page</Link>
-          </li>
-          <li className="text-blue-500">
-            <Link to="/subject">Elective Subjects Page</Link>
-          </li>
+ <li className="text-blue-500">
+                  <Link to="/student">Student Home Page</Link>
+                </li>
+                <li className="text-blue-500">
+                  <Link to="/subject">Elective Subjects Page</Link>
+                </li>
           <button className="bg-blue-500 text-white rounded px-4 py-2 mt-4" onClick={handleLogout}>
             Logout
           </button>
