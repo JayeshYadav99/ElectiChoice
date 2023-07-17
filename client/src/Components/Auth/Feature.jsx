@@ -6,7 +6,7 @@ export default function Feature() {
     <div>
       <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-10 mx-auto">
-          <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
+          <h1 class="text-3xl font-sans text-gray-800 capitalize lg:text-4xl dark:text-white">
             explore our awesome
             <span class="underline decoration-blue-500 mr-8">
               {"           "}Features
@@ -40,7 +40,7 @@ export default function Feature() {
                 </svg>
               </span>
 
-              <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+              <h1 class="text-2xl font-sans text-gray-700 capitalize dark:text-white">
                 Student Management
               </h1>
 
@@ -54,7 +54,7 @@ export default function Feature() {
 
               <Link
                 to="Student"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white "
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors  bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:bg-blue-700 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +91,7 @@ export default function Feature() {
                 </svg>
               </span>
 
-              <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+              <h1 class="text-2xl font-sans text-gray-700 capitalize dark:text-white">
                 Elective Subject Management
               </h1>
 
@@ -103,7 +103,7 @@ export default function Feature() {
 
               <Link
                 to="subject"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors  bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline  hover:bg-blue-700 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ export default function Feature() {
                 </svg>
               </span>
 
-              <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+              <h1 class="text-2xl font-sans text-gray-700 capitalize dark:text-white">
                 Elective Subject Selection
               </h1>
 
@@ -153,7 +153,7 @@ export default function Feature() {
 
               <Link
                 to="add-subject"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors  bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline  hover:bg-blue-700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
