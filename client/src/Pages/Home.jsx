@@ -58,6 +58,7 @@ const Home = () => {
   const [showSubjectFunctionality, setShowSubjectFunctionality] = useState(false);
   const [showSpecialRoutesFunctionality, setShowSpecialRoutesFunctionality] = useState(false);
   const token = cookies.get('TOKEN');
+  console.log(token);
 
   useEffect(() => {
     const verifyCookie = async () => {

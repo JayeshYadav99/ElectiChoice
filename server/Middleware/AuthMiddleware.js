@@ -5,6 +5,7 @@ const User = require("../Models/UserModel");
 module.exports.authMiddleware = (requiredRoles) => {
   return async (req, res, next) => {
     try {
+      console.log(req.cookies);
       const token = req.cookies.TOKEN;
 
       if (!token) {
