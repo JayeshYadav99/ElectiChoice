@@ -22,17 +22,16 @@ import SubjectForm from "./Components/Subject/SubjectForm";
 import StudentSubject from "./Components/Student/StudentSubject";
 import EditStudentSubject from "./Components/Student/EditStudentSubject";
 import StudentsForSubject from "./Components/Subject/StudentsForSubject";
+import Error from "./Components/Error";
 import AdminRoutes from "./Pages/AdminRoutes";
 
 function App() {
   const [count, setCount] = useState(0);
   // const token = cookies.get("TOKEN");
   return (
-    <>
+    <div className="bg-gray-900">
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
-
-
 
         <Route element={<PrivateRoutes />}>
           <Route
@@ -44,19 +43,25 @@ function App() {
               </>
             }
           ></Route>
-          <Route   element={<AdminRoutes/>}>
-      
-          <Route path="/add-subject" element={<SubjectForm />}></Route>
-        <Route path="/editsubject/:id" element={<EditSubject />}></Route>
-        <Route path="/edit-student-subject/:studentId/:electiveSubjectId" element={<EditStudentSubject />}></Route>
-        <Route path="/add-subject-to-student/:id" element={<StudentSubject/>}></Route>
-        <Route path="/add-student-to-subject/:id" element={<StudentsForSubject/>}></Route>
+          <Route element={<AdminRoutes />}>
+            <Route path="/add-subject" element={<SubjectForm />}></Route>
+            <Route path="/editsubject/:id" element={<EditSubject />}></Route>
+            <Route
+              path="/edit-student-subject/:studentId/:electiveSubjectId"
+              element={<EditStudentSubject />}
+            ></Route>
+            <Route
+              path="/add-subject-to-student/:id"
+              element={<StudentSubject />}
+            ></Route>
+            <Route
+              path="/add-student-to-subject/:id"
+              element={<StudentsForSubject />}
+            ></Route>
+            <Route path="/Error" element={<Error />}></Route>
           </Route>
           <Route path="Student" element={<StudentHome />}></Route>
-          
         </Route>
-
-
 
         <Route
           path="/Login"
@@ -78,12 +83,9 @@ function App() {
         <Route path="/add-student" element={<StudentForm />}></Route>
         <Route path="/edit/:id" element={<EditStudent />}></Route>
         <Route path="/Subject" element={<SubjectHome />}></Route>
-      
-  
-
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 }
 
