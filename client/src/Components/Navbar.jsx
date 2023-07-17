@@ -11,12 +11,12 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("https://elective-subject-selector-backend.onrender.com/yaae", {
+        const response = await axios.get("http://localhost:4000/yaae", {
           withCredentials: true,
         });
 
         const { status, user } = response.data;
-        if (user) {
+        if ( user) {
           setUsername(user.username);
         }
       } catch (error) {
