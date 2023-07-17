@@ -6,7 +6,7 @@ export default function Feature() {
     <div>
       <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-10 mx-auto">
-          <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
+          <h1 class="text-3xl font-sans text-gray-800 capitalize lg:text-4xl dark:text-white">
             explore our awesome
             <span class="underline decoration-blue-500 mr-8">
               {"           "}Features
@@ -40,7 +40,7 @@ export default function Feature() {
                 </svg>
               </span>
 
-              <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+              <h1 class="text-2xl font-sans text-gray-700 capitalize dark:text-white">
                 Student Management
               </h1>
 
@@ -91,7 +91,7 @@ export default function Feature() {
                 </svg>
               </span>
 
-              <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+              <h1 class="text-2xl font-sans text-gray-700 capitalize dark:text-white">
                 Elective Subject Management
               </h1>
 
@@ -140,7 +140,7 @@ export default function Feature() {
                 </svg>
               </span>
 
-              <h1 class="text-2xl font-semibold text-gray-700 capitalize dark:text-white">
+              <h1 class="text-2xl font-sans text-gray-700 capitalize dark:text-white">
                 Elective Subject Selection
               </h1>
 
