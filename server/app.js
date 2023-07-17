@@ -22,7 +22,7 @@ mongoose
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://elective-subject-selector-pgtl.onrender.com",
    
     credentials: true,
   })
