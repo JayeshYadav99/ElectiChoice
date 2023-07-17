@@ -39,7 +39,7 @@ const SubjectForm = () => {
     e.preventDefault();
     if (validateForm()) {
       axios
-        .post("http://localhost:4000/subject/addsubject", formData, {
+        .post("https://elective-subject-selector-backend.onrender.com/subject/addsubject", formData, {
           withCredentials: true,
         })
         .then((response) => {
@@ -80,9 +80,8 @@ const SubjectForm = () => {
                 name="subjectName"
                 value={formData.subjectName}
                 onChange={handleInputChange}
-                className={`w-full border ${
-                  errors.subjectName ? "border-red-500" : "border-gray-300"
-                } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
+                className={`w-full border ${errors.subjectName ? "border-red-500" : "border-gray-300"
+                  } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
               />
               {errors.subjectName && (
                 <p className="text-red-500 text-sm mt-1">
@@ -103,9 +102,8 @@ const SubjectForm = () => {
                 name="subjectCode"
                 value={formData.subjectCode}
                 onChange={handleInputChange}
-                className={`w-full border ${
-                  errors.subjectCode ? "border-red-500" : "border-gray-300"
-                } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
+                className={`w-full border ${errors.subjectCode ? "border-red-500" : "border-gray-300"
+                  } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
               />
               {errors.subjectCode && (
                 <p className="text-red-500 text-sm mt-1">
@@ -125,11 +123,10 @@ const SubjectForm = () => {
                 name="subjectDescription"
                 value={formData.subjectDescription}
                 onChange={handleInputChange}
-                className={`w-full border ${
-                  errors.subjectDescription
+                className={`w-full border ${errors.subjectDescription
                     ? "border-red-500"
                     : "border-gray-300"
-                } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
+                  } rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900`}
               />
               {errors.subjectDescription && (
                 <p className="text-red-500 text-sm mt-1">

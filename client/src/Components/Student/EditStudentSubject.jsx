@@ -25,7 +25,7 @@ const EditStudentSubject = () => {
     try {
       if (studentId && electiveSubjectId) {
         const response = await axios.get(
-          `http://localhost:4000/main/getElectiveSubjectsForStudent/${studentId}`,
+          `https://elective-subject-selector-backend.onrender.com/main/getElectiveSubjectsForStudent/${studentId}`,
           { withCredentials: true }
         );
         const subject = response.data.find(
@@ -49,7 +49,7 @@ const EditStudentSubject = () => {
   const handleSave = async () => {
     try {
       await axios.put(
-        `http://localhost:4000/main/editSubjectOfStudent`,
+        `https://elective-subject-selector-backend.onrender.com/main/editSubjectOfStudent`,
         {
           studentId,
           electiveSubjectId,

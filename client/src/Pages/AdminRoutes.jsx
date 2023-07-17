@@ -13,7 +13,7 @@ export default function AdminRoute() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/yaae', {
+        const response = await axios.get('https://elective-subject-selector-backend.onrender.com/yaae', {
           withCredentials: true,
         });
 
