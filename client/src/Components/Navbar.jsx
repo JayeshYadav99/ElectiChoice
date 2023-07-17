@@ -38,7 +38,7 @@ export default function Navbar() {
               alt="subject Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              Elective Subject Selector and Manager
+              ElectiChoice
             </span>
           </Link>
           <button

@@ -54,7 +54,7 @@ export default function Feature() {
 
               <Link
                 to="Student"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white "
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors  bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:bg-blue-700 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@ export default function Feature() {
 
               <Link
                 to="subject"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors  bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline  hover:bg-blue-700 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +153,7 @@ export default function Feature() {
 
               <Link
                 to="add-subject"
-                class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-200 transform bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
+                class="inline-flex p-2 text-blue-500 capitalize transition-colors  bg-blue-100 rounded-full dark:bg-blue-500 dark:text-white hover:underline  hover:bg-blue-700"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
