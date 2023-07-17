@@ -24,6 +24,7 @@ mongoose
   "https://elective-subject-selector-backend.onrender.com",
     // Add more URLs as needed
   ];
+  app.use(cookieParser());
 
 app.use(
   cors({
@@ -40,7 +41,7 @@ app.use(
 //     optionSuccessStatus:200
 // }
 // app.use(cors(corsOrigin));
-app.use(cookieParser());
+
 app.use(express.json());
 
 app.use("/auth", authRoute);
@@ -49,6 +50,7 @@ app.use("/student" ,authMiddleware(["admin","user"]), StudentRoute);
 app.use("/subject",authMiddleware(["admin","user"]),SubjectRoute);
 app.get("/yaae", authMiddleware(["admin","user"]), (req, res) => {
   // console.log(req.user);
+  
   res.json({ status: true, user: req.user });
 });
 
