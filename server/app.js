@@ -19,10 +19,16 @@ mongoose
   })
   .then(() => console.log("MongoDB is  connected successfully"))
   .catch((err) => console.error(err));
+  const allowedOrigins = [
+    "http://127.0.0.1:5173",
+  "https://elective-subject-selector-backend.onrender.com",
+    // Add more URLs as needed
+  ];
 
 app.use(
   cors({
-    origin: "https://elective-subject-selector-pgtl.onrender.com",
+    origin:allowedOrigins,
+    
    
     credentials: true,
   })
