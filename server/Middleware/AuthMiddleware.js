@@ -35,3 +35,6 @@ return async (req, res, next) => {
   }
 
 }
+const hasRequiredRole = (userRole, requiredRoles) => {
+  return requiredRoles.includes(userRole);
+};

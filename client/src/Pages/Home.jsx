@@ -68,6 +68,7 @@ const Home = () => {
         navigate('/login');
       } else {
         try {
+          console.log(token)
           const response = await axios.get('https://elective-subject-selector-backend.onrender.com/yaae', {
             withCredentials: true,
             headers: {
