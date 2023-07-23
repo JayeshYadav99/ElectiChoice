@@ -1,7 +1,6 @@
 {
   "name": "react-basics",
   "private": true,
- 
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -10,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@alan-ai/alan-sdk-web": "^1.8.48",
     "axios": "^1.4.0",
     "flowbite": "^1.7.0",
     "flowbite-react": "^0.4.10",
