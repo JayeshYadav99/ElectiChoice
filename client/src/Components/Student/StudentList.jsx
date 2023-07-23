@@ -128,7 +128,7 @@ return (
                 to={`/add-subject-to-student/${student.idNumber}`}
                 className="bg-green-500 text-white px-4 py-2 rounded mr-2"
               >
-                Add Subject
+                View Subjects
               </Link>
               <button
                 onClick={() => handleDelete(student)}

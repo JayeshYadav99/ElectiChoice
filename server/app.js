@@ -5,8 +5,8 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoutes");
 const StudentRoute = require("./Routes/StudentRoutes");
-const SubjectRoute = require("./Routes/SubjectRoutes");
-const StudentElectiveSubjectRoute = require("./Routes/StudentElectiveSubjectRoutes");
+const SubjectRoute = require('./Routes/SubjectRoutes');
+const StudentElectiveSubjectRoute = require('./Routes/StudentElectiveSubjectRoutes');
 const { authMiddleware } = require("./Middleware/AuthMiddleware");
 
 require("dotenv").config();
