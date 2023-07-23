@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar";
 import Feature from "../Components/Auth/Feature";
 import Contectus from "../Components/Contectus";
 import { Link } from "react-router-dom";
+import FAQ from "../Components/FAQ";
 
 export default function Homepage() {
   return (
@@ -51,6 +52,7 @@ export default function Homepage() {
       </section>
       <Feature></Feature>
       <Contectus></Contectus>
+      <FAQ />
     </div>
   );
 }
