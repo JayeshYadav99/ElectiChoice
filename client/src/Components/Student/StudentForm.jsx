@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
 import StudentNavbar from "../StudentNavbar";
 import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../Auth/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 
 const StudentForm = () => {
+  const { token } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     name: "",
     idNumber: "",
@@ -44,8 +47,13 @@ const StudentForm = () => {
     if (validateForm()) {
       // Make API call to backend to create/update student record
       axios
-        .post("https://elective-subject-selector-backend.onrender.com/student/addstudent", formData, {
-          withCredentials: true,
+        .post(`${import.meta.env.VITE_API_URL}/student/addstudent`, formData, {
+          
+
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          
         })
         .then((response) => {
           // Handle success response

@@ -21,7 +21,7 @@ const studentSchema = new mongoose.Schema({
   },
 });
 
-const Student = mongoose.model("Student", studentSchema);
+
 const electiveSubjectSchema = new mongoose.Schema({
   subjectName: {
     type: String,
@@ -38,6 +38,8 @@ const electiveSubjectSchema = new mongoose.Schema({
   }
 });
 
+
+const Student = mongoose.model("Student", studentSchema);
 const ElectiveSubject = mongoose.model('ElectiveSubject', electiveSubjectSchema);
 
 module.exports = {Student,ElectiveSubject};

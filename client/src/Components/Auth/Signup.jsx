@@ -27,12 +27,19 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://elective-subject-selector-backend.onrender.com/auth/signup",
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
         {
           ...inputValue,
           role: role,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        
+
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        }
       );
 
       if (response) {

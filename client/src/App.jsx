@@ -25,10 +25,13 @@ import StudentsForSubject from "./Components/Subject/StudentsForSubject";
 import AdminRoutes from "./Pages/AdminRoutes";
 
 function App() {
+  
+
   const [count, setCount] = useState(0);
   // const token = cookies.get("TOKEN");
   return (
     <>
+    <h1>{import.meta.env.VITE_API_URL}</h1>
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
 

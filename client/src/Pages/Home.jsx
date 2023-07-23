@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useContext } from "react";
+import { AuthContext } from "../Components/Auth/AuthContext";
 import Cookies from 'universal-cookie';
 
 const StudentDetailsFunctionality = () => {
@@ -57,7 +59,7 @@ const Home = () => {
   const [showStudentFunctionality, setShowStudentFunctionality] = useState(false);
   const [showSubjectFunctionality, setShowSubjectFunctionality] = useState(false);
   const [showSpecialRoutesFunctionality, setShowSpecialRoutesFunctionality] = useState(false);
-  const token = cookies.get('TOKEN');
+  const { token,logout } = useContext(AuthContext);
   console.log(token);
 
   useEffect(() => {
@@ -65,11 +67,11 @@ const Home = () => {
       console.log(token);
       if (!token) {
         console.log('1');
-        navigate('/login');
+        navigate('/');
       } else {
         try {
           console.log(token)
-          const response = await axios.get('https://elective-subject-selector-backend.onrender.com/yaae', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/yaae`, {
             withCredentials: true,
             headers: {
               Authorization: `Bearer ${token}`,
@@ -84,13 +86,13 @@ const Home = () => {
           } else {
             console.log('2');
             cookies.remove('TOKEN', { path: '/login' });
-            navigate('/login');
+            navigate('/');
           }
         } catch (error) {
           console.log('3');
           console.error(error);
           cookies.remove('TOKEN', { path: '/login' });
-          navigate('/signup');
+          navigate('/');
         }
       }
     };
@@ -100,17 +102,9 @@ const Home = () => {
 
   const handleLogout = () => {
     console.log('4');
-    cookies.remove('TOKEN', { path: '/' });
-    console.log(cookies.get('TOKEN'));
+   logout();
 
-    if (token) {
-      console.log('cookie is here');
-      console.log(cookies.cookies.TOKEN);
-    } else {
-      console.log('cookie is not here');
-    }
-
-    navigate('/login');
+    navigate('/');
   };
 
   const toggleStudentFunctionality = () => {

@@ -2,21 +2,26 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import axios from 'axios'
-
+import { useContext } from "react";
+import { AuthContext } from "./Auth/AuthContext";
 export default function Navbar() {
   const cookies = new Cookies();
-  const token = cookies.get("TOKEN");
+  const { token,isLoggedIn,logout } = useContext(AuthContext);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("https://elective-subject-selector-backend.onrender.com/yaae", {
-          withCredentials: true,
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/yaae`, {
+      
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
         });
 
         const { status, user } = response.data;
         if (user) {
+          console.log(user);
           setUsername(user.username);
         }
       } catch (error) {
@@ -26,6 +31,12 @@ export default function Navbar() {
 
     fetchUser();
   }, []);
+
+  const handleLogout = () => {
+    logout();
+    // Perform any additional actions after logout, e.g., redirect to login page
+    // history.push("/login"); // If you are using React Router, you can redirect the user to the login page
+  };
 
   return (
     <div>
@@ -80,13 +91,27 @@ export default function Navbar() {
                 </Link>
               </li>
               {token && username ? (
-                <li>
+                <>
+                                <li>
                   <span className="block py-2 pl-3 pr-4 text-gray-900 rounded bg-gray-200">
                     Welcome, {username}
                   </span>
                 </li>
+                <li>
+                <Link
+                  to="/"
+                  className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent"
+                  aria-current="page"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Link>
+              </li>
+                </>
+
+                
               ) : null}
-              {!token && (
+              {!isLoggedIn && (
                 <>
                   <li>
                     <a

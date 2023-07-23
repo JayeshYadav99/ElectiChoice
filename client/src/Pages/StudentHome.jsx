@@ -25,8 +25,12 @@ export default function StudentHome() {
         navigate("/login");
       } else {
         try {
-          const response = await axios.get("https://elective-subject-selector-backend.onrender.com/yaae", {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/yaae`, {
             withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+
             // headers: {
             //   Authorization: `Bearer ${token}`,
             // },
@@ -77,7 +81,7 @@ export default function StudentHome() {
 
     <div>
       <StudentNavbar />
-      <StudentList />
+      <StudentList token={token} />
 
     </div>
   )

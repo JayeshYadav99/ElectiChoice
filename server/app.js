@@ -5,8 +5,8 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const authRoute = require("./Routes/AuthRoutes");
 const StudentRoute = require("./Routes/StudentRoutes");
-const SubjectRoute =require('./Routes/SubjectRoutes');
-const StudentElectiveSubjectRoute =require('./Routes/StudentElectiveSubjectRoutes');
+const SubjectRoute = require('./Routes/SubjectRoutes');
+const StudentElectiveSubjectRoute = require('./Routes/StudentElectiveSubjectRoutes');
 const { authMiddleware } = require("./Middleware/AuthMiddleware");
 
 require("dotenv").config();
@@ -19,18 +19,18 @@ mongoose
   })
   .then(() => console.log("MongoDB is  connected successfully"))
   .catch((err) => console.error(err));
-  const allowedOrigins = [
-    "http://127.0.0.1:5173",
+const allowedOrigins = [
+  "http://127.0.0.1:5173",
   "https://elective-subject-selector-backend.onrender.com",
-    // Add more URLs as needed
-  ];
-  app.use(cookieParser());
+  // Add more URLs as needed
+];
+app.use(cookieParser());
 
 app.use(
   cors({
-    origin:allowedOrigins,
-    
-   
+    origin: allowedOrigins,
+
+
     credentials: true,
   })
 );
@@ -45,18 +45,18 @@ app.use(
 app.use(express.json());
 
 app.use("/auth", authRoute);
-app.use("/main",authMiddleware(["admin","user","student"]),StudentElectiveSubjectRoute);
-app.use("/student" ,authMiddleware(["admin","user"]), StudentRoute);
-app.use("/subject",authMiddleware(["admin","user"]),SubjectRoute);
-app.get("/yaae", authMiddleware(["admin","user"]), (req, res) => {
-  // console.log(req.user);
-  
+app.use("/main", authMiddleware(["admin", "user", "student"]), StudentElectiveSubjectRoute);
+app.use("/student", authMiddleware(["admin", "user"]), StudentRoute);
+app.use("/subject", authMiddleware(["admin", "user"]), SubjectRoute);
+app.get("/yaae", authMiddleware(["admin", "user"]), (req, res) => {
+
+
   res.json({ status: true, user: req.user });
 });
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
   res.send("dsjdnjsd");
 })

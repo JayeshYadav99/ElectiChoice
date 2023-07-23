@@ -1,9 +1,20 @@
-const Student = require("../Models/StudentModel");
+const{ Student} = require("../Models/StudentModel");
 
 
 exports.getAllStudents = async (req, res) => {
+  console.log("hello");
     try {
-      const students = await Student.find();
+      console.log(Student);
+
+        const students = await Student.find({});
+        console.log(students);
+        // Process students data here
+     
+      if(!students)
+      {
+        res.status(404).json({ error: "No students" });
+      }
+      console.log("student",students);
       res.json(students);
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });

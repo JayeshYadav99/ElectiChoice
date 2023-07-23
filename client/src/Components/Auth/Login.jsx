@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { AuthContext } from "./AuthContext";
+
+
 
 const Login = () => {
   const cookies = new Cookies();
+  const { login } = useContext(AuthContext);
+  
+
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -24,15 +31,25 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://elective-subject-selector-backend.onrender.com/auth/login",
+        `${import.meta.env.VITE_API_URL}/auth/login`,
         {
           ...inputValue,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+          
+
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        }
       );
 
       if (response) {
         console.log(response.data.token);
+        localStorage.setItem("authToken",response.data.token);
+        login(response.data.token);
+
         cookies.set("TOKEN", response.data.token, {
           path: "/",
         });

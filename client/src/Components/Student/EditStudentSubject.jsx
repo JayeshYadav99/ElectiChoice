@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../Auth/AuthContext";
 const EditStudentSubject = () => {
+  const { token } = useContext(AuthContext);
+  console.log("localtoken ------------------>",token)
+  console.log("GLOBAL TSOKRN",token);
   const [subjectName, setSubjectName] = useState("");
   const [subjectDescription, setSubjectDescription] = useState("");
   const [subjectCode, setSubjectCode] = useState("");
@@ -25,8 +30,17 @@ const EditStudentSubject = () => {
     try {
       if (studentId && electiveSubjectId) {
         const response = await axios.get(
-          `https://elective-subject-selector-backend.onrender.com/main/getElectiveSubjectsForStudent/${studentId}`,
-          { withCredentials: true }
+          `${import.meta.env.VITE_API_URL}/main/getElectiveSubjectsForStudent/${studentId}`,
+          {
+            withCredentials: true,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+
+            // headers: {
+            //   Authorization: `Bearer ${token}`,
+            // },
+          }
         );
         const subject = response.data.find(
           (item) => item.electiveSubject._id === electiveSubjectId
@@ -49,7 +63,7 @@ const EditStudentSubject = () => {
   const handleSave = async () => {
     try {
       await axios.put(
-        `https://elective-subject-selector-backend.onrender.com/main/editSubjectOfStudent`,
+        `${import.meta.env.VITE_API_URL}/main/editSubjectOfStudent`,
         {
           studentId,
           electiveSubjectId,
@@ -57,45 +71,55 @@ const EditStudentSubject = () => {
           subjectDescription,
           subjectCode,
         },
-        { withCredentials: true }
+        {
+
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
+        }
+
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        
       );
-      toast.success("Subject updated successfully!");
-      fetchSubjectDetails(studentId);
+toast.success("Subject updated successfully!");
+fetchSubjectDetails(studentId);
     } catch (error) {
-      console.error(error);
-      toast.error("Failed to update subject.");
-    }
+  console.error(error);
+  toast.error("Failed to update subject.");
+}
   };
 
-  return (
+return (
+  <div>
+    <h3>Edit Subject</h3>
     <div>
-      <h3>Edit Subject</h3>
-      <div>
-        <label>Subject Name:</label>
-        <input
-          type="text"
-          value={subjectName}
-          onChange={(e) => setSubjectName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Subject Description:</label>
-        <textarea
-          value={subjectDescription}
-          onChange={(e) => setSubjectDescription(e.target.value)}
-        ></textarea>
-      </div>
-      <div>
-        <label>Subject Code:</label>
-        <input
-          type="text"
-          value={subjectCode}
-          onChange={(e) => setSubjectCode(e.target.value)}
-        />
-      </div>
-      <button onClick={handleSave}>Save</button>
+      <label>Subject Name:</label>
+      <input
+        type="text"
+        value={subjectName}
+        onChange={(e) => setSubjectName(e.target.value)}
+      />
     </div>
-  );
+    <div>
+      <label>Subject Description:</label>
+      <textarea
+        value={subjectDescription}
+        onChange={(e) => setSubjectDescription(e.target.value)}
+      ></textarea>
+    </div>
+    <div>
+      <label>Subject Code:</label>
+      <input
+        type="text"
+        value={subjectCode}
+        onChange={(e) => setSubjectCode(e.target.value)}
+      />
+    </div>
+    <button onClick={handleSave}>Save</button>
+  </div>
+);
 };
 
 export default EditStudentSubject;
