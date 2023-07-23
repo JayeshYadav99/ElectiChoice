@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useContext } from "react";
+import { AuthContext } from "../Components/Auth/AuthContext";
 import Cookies from 'universal-cookie';
 
 const StudentDetailsFunctionality = () => {
@@ -57,17 +59,19 @@ const Home = () => {
   const [showStudentFunctionality, setShowStudentFunctionality] = useState(false);
   const [showSubjectFunctionality, setShowSubjectFunctionality] = useState(false);
   const [showSpecialRoutesFunctionality, setShowSpecialRoutesFunctionality] = useState(false);
-  const token = cookies.get('TOKEN');
+  const { token,logout } = useContext(AuthContext);
+  console.log(token);
 
   useEffect(() => {
     const verifyCookie = async () => {
       console.log(token);
       if (!token) {
         console.log('1');
-        navigate('/login');
+        navigate('/');
       } else {
         try {
-          const response = await axios.get('http://localhost:4000/yaae', {
+          console.log(token)
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/yaae`, {
             withCredentials: true,
             headers: {
               Authorization: `Bearer ${token}`,
@@ -82,13 +86,13 @@ const Home = () => {
           } else {
             console.log('2');
             cookies.remove('TOKEN', { path: '/login' });
-            navigate('/login');
+            navigate('/');
           }
         } catch (error) {
           console.log('3');
           console.error(error);
           cookies.remove('TOKEN', { path: '/login' });
-          navigate('/signup');
+          navigate('/');
         }
       }
     };
@@ -98,17 +102,9 @@ const Home = () => {
 
   const handleLogout = () => {
     console.log('4');
-    cookies.remove('TOKEN', { path: '/' });
-    console.log(cookies.get('TOKEN'));
+   logout();
 
-    if (token) {
-      console.log('cookie is here');
-      console.log(cookies.cookies.TOKEN);
-    } else {
-      console.log('cookie is not here');
-    }
-
-    navigate('/login');
+    navigate('/');
   };
 
   const toggleStudentFunctionality = () => {
@@ -157,12 +153,12 @@ const Home = () => {
               </ul>
             </div>
           )}
- <li className="text-blue-500">
-                  <Link to="/student">Student Home Page</Link>
-                </li>
-                <li className="text-blue-500">
-                  <Link to="/subject">Elective Subjects Page</Link>
-                </li>
+          <li className="text-blue-500">
+            <Link to="/student">Student Home Page</Link>
+          </li>
+          <li className="text-blue-500">
+            <Link to="/subject">Elective Subjects Page</Link>
+          </li>
           <button className="bg-blue-500 text-white rounded px-4 py-2 mt-4" onClick={handleLogout}>
             Logout
           </button>

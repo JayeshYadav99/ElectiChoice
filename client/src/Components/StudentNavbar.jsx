@@ -6,7 +6,13 @@ const StudentNavbar = () => {
     <nav className="bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+          {/* Add the icon here */}
           <div className="flex items-center">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png"
+              alt="Student Icon"
+              className="h-6 w-6 mr-2"
+            />
             <Link to="/" className="text-white font-bold text-lg">
               Student App
             </Link>

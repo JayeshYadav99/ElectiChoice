@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { Outlet, useNavigate } from 'react-router-dom';
-
+import { AuthContext } from "../Components/Auth/AuthContext";
+import { useContext } from "react";
 export default function AdminRoute() {
   const cookies = new Cookies();
   const navigate = useNavigate();
-  const token = cookies.get('TOKEN');
+  const token = localStorage.getItem("authToken");
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/yaae', {
-          withCredentials: true,
+        console.log("GLOBAL TSOKRN",token);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/yaae`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+
         });
 
         const { status, user } = response.data;

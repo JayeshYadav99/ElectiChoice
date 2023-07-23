@@ -24,11 +24,19 @@ import StudentsForSubject from "./Components/Subject/StudentsForSubject";
 import Error from "./Components/Error";
 import AdminRoutes from "./Pages/AdminRoutes";
 
+import AlanAIComponent from "./alan";
 function App() {
-  const [count, setCount] = useState(0);
+  
+
   // const token = cookies.get("TOKEN");
   return (
+
+    <>
+    <AlanAIComponent/>
+    {/* <h1>{import.meta.env.VITE_API_URL}</h1> */}
+
     <div className="bg-gray-900">
+
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
 

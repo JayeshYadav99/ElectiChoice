@@ -3,31 +3,28 @@ const jwt = require("jsonwebtoken");
 const User = require("../Models/UserModel");
 
 module.exports.authMiddleware = (requiredRoles) => {
-  return async (req, res, next) => {
+return async (req, res, next) => {
     try {
-      const token = req.cookies.TOKEN;
+        console.log("Headers",req.headers.authorization);
+      var token =req.headers.authorization;
 
       if (!token) {
         return res.status(401).json({ message: "Access denied. No token provided." });
       }
-
-      jwt.verify(token, process.env.TOKEN_KEY, async (err, decoded) => {
+    token=token.split(" ")[1];
+      jwt.verify(token, process.env.TOKEN_KEY,  async (err, decoded) => {
         if (err) {
           return res.status(401).json({ message: "Invalid token." });
         }
 
-        const user = await User.findById(decoded.id);
-        if (!user) {
-          return res.status(401).json({ message: "Invalid token." });
-        }
 
-        req.user = user;
-
+        const user = await User.findById(decoded.id) ;
+        if (user)  req.user=user;// Assuming the JWT payload contains the user information
         const { role } = user;
-        // console.log(role);
-        if (!hasRequiredRole(role, requiredRoles)) {
-          return res.status(403).json({ message: "Access denied. Insufficient role." });
-        }
+        //         // console.log(role);
+                if (!hasRequiredRole(role, requiredRoles)) {
+                  return res.status(403).json({ message: "Access denied. Insufficient role." });
+                }
 
         next();
       });
@@ -35,9 +32,9 @@ module.exports.authMiddleware = (requiredRoles) => {
       console.error(error);
       res.status(500).json({ message: "Server error." });
     }
-  };
-};
+  }
 
+}
 const hasRequiredRole = (userRole, requiredRoles) => {
   return requiredRoles.includes(userRole);
 };

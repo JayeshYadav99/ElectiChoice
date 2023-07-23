@@ -27,12 +27,19 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:4000/auth/signup",
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
         {
           ...inputValue,
           role: role,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        
+
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
+          // },
+        }
       );
 
       if (response) {
@@ -120,7 +127,7 @@ const Signup = () => {
               className="w-full p-2 border rounded text-black"
             >
               <option value="student">Student</option>
-              <option value="admin">Admin</option>
+              <option value="admin">College Admin</option>
             </select>
           </div>
           <button
