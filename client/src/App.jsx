@@ -31,7 +31,7 @@ function App() {
   // const token = cookies.get("TOKEN");
   return (
     <>
-    <h1>{import.meta.env.VITE_API_URL}</h1>
+    {/* <h1>{import.meta.env.VITE_API_URL}</h1> */}
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
 
