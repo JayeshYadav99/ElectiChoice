@@ -21,7 +21,7 @@ mongoose
   .catch((err) => console.error(err));
 const allowedOrigins = [
   "http://127.0.0.1:5173",
-  "https://elective-subject-selector-backend.onrender.com",
+  "https://elective-subject-selector-pgtl.onrender.com",
   // Add more URLs as needed
 ];
 app.use(cookieParser());
